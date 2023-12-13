@@ -86,7 +86,7 @@ const OrderDetails = ({ order, showDetails, setShowDetails, status, role }) => {
           )}
           {role === "shaper" && status !== "Completed" && (
             <div className="statusContainer">
-              <h2>Update Status</h2>
+              <h2>Update Order Status</h2>
               <div id="statusBox">
                 <select
                   onChange={(e) => setNewStatus(e.target.value)}

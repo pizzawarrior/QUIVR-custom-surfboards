@@ -39,5 +39,9 @@ class OrderUpdate(BaseModel):
     reviewed: bool
 
 
+class OrdersIn(BaseModel):
+    orders: list[OrderIn]
+
+
 class OrdersOut(BaseModel):
     orders: list[OrderOut]

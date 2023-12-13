@@ -5,7 +5,6 @@ export const ordersApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_API_HOST,
   }),
-
   tagTypes: ["Order"],
   endpoints: (builder) => ({
     createOrder: builder.mutation({

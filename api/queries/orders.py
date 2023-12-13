@@ -1,7 +1,9 @@
 from fastapi import HTTPException, status
 from queries.client import MongoQueries
 from bson.objectid import ObjectId
-from models.orders import OrderIn, OrderOut, OrderUpdate
+from models.orders import OrderIn, OrderOut, OrderUpdate  # OrdersOut, OrdersIn
+
+# from typing import List
 
 import datetime
 
@@ -20,22 +22,22 @@ class OrderQueries(MongoQueries):
         data["order_id"] = str(data["_id"])
         return OrderOut(**data)
 
-    # def createMany(
-    #         self, orderList: List(OrderIn), customer_username: str
-    #     ) -> dict:
-    #         result = []
-    #         for data in orderList:
-    #             data = order.dict()
-    #             data["customer_username"] = customer_username
-    #             data["order_status"] = "Order received"
-    #             data["reviewed"] = False
-    #             now = datetime.datetime.utcnow()
-    #             data["date"] = now.strftime("%Y-%m-%d, %H:%M")
-    #             result.append(data)
-    #         self.collection.insertMany(result)
-    #         # data["order_id"] = str(data["_id"])
-
-    # return {"message": "orders created"}
+    # def create(
+    # self,
+    # orders: List(OrdersIn),
+    # customer_username: str) -> OrdersOut:
+    #     result = []
+    #     for order in orders:
+    #         order = order.dict()
+    #         order["customer_username"] = customer_username
+    #         order["order_status"] = "Order received"
+    #         order["reviewed"] = False
+    #         now = datetime.datetime.utcnow()
+    #         order["date"] = now.strftime("%Y-%m-%d, %H:%M")
+    #         result.append(order)
+    #     self.collection.insert_many(result)
+    #     order["order_id"] = str(order["_id"])
+    #     return OrdersOut(**order)
 
     def list_orders(self) -> OrderOut:
         orders = []
