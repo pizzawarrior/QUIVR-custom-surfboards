@@ -27,6 +27,7 @@ import {
 const CartDetails = ({ order, setShowCart, addToCart, setAddToCart }) => {
   const price = 849;
   const subtotal = price * addToCart.length;
+
   const [createOrder, result] = useCreateOrderMutation();
   const [errorMessage, setErrorMessage] = useState("");
 

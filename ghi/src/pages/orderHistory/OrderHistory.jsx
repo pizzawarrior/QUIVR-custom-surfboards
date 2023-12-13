@@ -46,6 +46,7 @@ const OrderHistory = () => {
       <Wrapper>
         {account && (
           <>
+            <h1>Order List</h1>
             <OrderDetails
               order={detailedOrder}
               showDetails={showDetails}
