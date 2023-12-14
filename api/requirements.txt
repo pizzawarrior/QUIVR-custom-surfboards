@@ -1,0 +1,5 @@
+fastapi[all]>=0.78.0
+uvicorn[standard]==0.17.6
+pytest
+pymongo==4.3.3
+jwtdown-fastapi>=0.5.0
