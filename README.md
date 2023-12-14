@@ -1,4 +1,4 @@
-# QUIVR: custom surfboard ordering made easy
+# QUIVR: Custom surfboard ordering made easy
 
 ### Problem Statement:
 
