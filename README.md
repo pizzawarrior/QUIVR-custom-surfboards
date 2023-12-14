@@ -14,11 +14,11 @@ QUIVR steps in by streamlining the ordering process: orders are placed with shap
 
 ### User Profiles:
 
-![User_Profile_1](/uploads/79b15a44f94714d26a21361c4c621dfb/User_Profile_1.png)
+![User Profile 1](https://github.com/pizzawarrior/quivr/assets/94874182/f664ebb3-a723-41f1-9611-f844105e31cf)
 
-![User_Profile_2](/uploads/9e88df126f4a751ab31ddcd4dfc19ef8/User_Profile_2.png)
+![User Profile 2](https://github.com/pizzawarrior/quivr/assets/94874182/1571d5da-09b1-4e55-8372-77e9c244321e)
 
-![User_Profile_3](/uploads/3d0c80fceb4133e64e95206da53911d8/User_Profile_3.png)
+![User Profile 3](https://github.com/pizzawarrior/quivr/assets/94874182/a8937864-fb67-41a7-8102-4dde2e3e0619)
 
 ### Technical Details:
 
@@ -42,11 +42,11 @@ To view the project:
 
 ## App Design
 
-![Application_Architecture](/uploads/4005e5365eaf00718162d2b959c73112/Application_Architecture.png)
+![Application Architecture](https://github.com/pizzawarrior/quivr/assets/94874182/279f7227-e73e-441e-ba95-bd8bf44cce9b)
 
 ## Endpoints
 
-![Application_Endpoints](/uploads/70296425a95aac25f832cd5bfbea4518/Application_Endpoints.png)
+![Application Endpoints](https://github.com/pizzawarrior/quivr/assets/94874182/40be4743-9f2b-49f4-9744-a36f622d75a1)
 
 ### Backend Auth and the Accounts Model
 
@@ -97,6 +97,10 @@ The Orders model represents all of the properties required to create a custome s
 -   surfboard_desc: string | optional; users can add additional details such as color, or other requests
 
 The only properties that can be updated on this model are whether the order has been reviewed or not, and what the status is.
+
+### Demo Pages
+
+<img width="1721" alt="Home-page" src="https://github.com/pizzawarrior/quivr/assets/94874182/100164dd-7036-437d-9f7f-f27c648767e2">
 
 ## Future Iterations of QUIVR
 - Reviews will be visible from the landing page, along with a short snapshot summary
