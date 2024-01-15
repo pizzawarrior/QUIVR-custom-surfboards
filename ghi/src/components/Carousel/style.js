@@ -5,10 +5,11 @@ export const CarouselContainer = styled.div`
   overflow: hidden;
   background-color: #f7e7be;
 
+  //arrow container: use for arrow spacing
   .container {
     display: flex;
     gap: 55em;
-    padding-left: 23em;
+    padding-left: 21.2em;
   }
 `;
 
@@ -17,6 +18,7 @@ export const CarouselWrapper = styled.div`
   transition: transform 0.5s ease-in-out;
 `;
 
+// img in carousel:
 export const CarouselItem = styled.div`
   min-width: 100%;
   img {

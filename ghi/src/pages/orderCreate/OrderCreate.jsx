@@ -69,7 +69,7 @@ const OrderCreate = () => {
     setAddToCart([...addToCart, order]);
     handleClear();
   }
-  console.log(addToCart);
+  // console.log(addToCart);
 
   return (
     <ImgBackground>
