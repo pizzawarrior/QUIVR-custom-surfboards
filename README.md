@@ -30,7 +30,7 @@ This project was built using MongoDB with FastAPI and pyMongo for the backend, w
 
 - Jessica Dickerson - Backend Auth, Users backend, React frontend, frontend style structure
 - Michael Aguilar - Reviews backend, React, UI and Graphic Design
-- Ian Norstad - Orders backend, React and Redux, UI and Graphic Design, testing, and deployment
+- Ian Norstad - Orders backend, React and Redux, UI and Graphic Design, testing, deployment, and this README!
 
 ## Running the Project
 
@@ -39,7 +39,7 @@ To view the deployed project:
 1. Open https://spidergrrljess.gitlab.io/module3-project-gamma/ in your browser
 2. Click the Login button
 3. Click Sign Up to register your new account
-4. Once the form is submitted, you will be logged in and will have full customer access, including making a custom surfboard order, viewing your order history, and leaving reviews for orders
+4. Once the form is submitted, you will be logged in and will have full customer access, including making a custom surfboard order, viewing your order history, and leaving reviews for completed orders
 
 To view this project locally:
 
@@ -51,14 +51,14 @@ To view this project locally:
    DB_NAME=quivr-db
    USER_NAME=your_username
    USER_PW=your_password
-4. cd into this project, and run `docker compose up`
+4. cd into this project directory and run `docker compose up`
 5. Successful launch should build 3 Docker containers and log a 'Compiled successfully!' message in the console
 6. The project can now be viewed in the browser: http://localhost:3000
-7. You can now create a customer account from this page
+7. You can now create a customer account in the browser
 8. To test the backend routes go to the Swagger UI here: http://localhost:8000/docs
 9. You will need to create a shaper account to create an order, click here and fill out all criteria: http://localhost:8000/docs#/Auth/create_account_accounts_post
-10. Now when you go back to the homepage for the site and log in with your customer creds you should be able to select the shaper account you created in Swagger, and create a surfboard order.
-11. If order creation was success, it should populate on the Order History page.
+10. Now when you go back to the homepage for the site and log in with your customer creds you should be able to select the shaper account you created in Swagger, and create a surfboard order
+11. If order creation was successful the order should populate on your Order History page
 12. You can also log in as the shaper you created, and update the status of your current orders by clicking the Order History page
 
 ## App Design
