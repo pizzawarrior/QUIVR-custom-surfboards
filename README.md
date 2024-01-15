@@ -22,7 +22,7 @@ QUIVR steps in by streamlining the ordering process: orders are placed with shap
 
 ### Technical Details:
 
-This project was built using MongoDB with FastAPI and pyMongo for the backend, with an Atlas Cloud database. JWT-Down was used for Auth, and Docker is used for creating a stable environment to deploy the project in. React was used for the front end, along with help from Redux to carefully manage state, and Axios to fetch the data, as well as Styled Components for cleanly managing styles.
+This project was built using MongoDB with FastAPI and pyMongo for the backend, with an Atlas Cloud database. JWT-Down was used for Auth, and Docker is used for creating a stable environment to deploy the project in. React was used for the front end, along with help from Redux to carefully manage state, and Axios to fetch the data, as well as Styled Components for cleanly managing styles. Test coverage is implemented via PyTest for CI/CD.
 
 :no_entry_sign: Absolutely NO bootstrap or comparable style libraries were used in the creation of this project.
 
@@ -43,17 +43,23 @@ To view the deployed project:
 
 To view this project locally:
 
-1. Make sure to have Docker Desktop downloaded and open
-2. Clone this repo
-3. cd into this project, and run `docker compose up`
-4. Successful launch should build 3 Docker containers and log a 'Compiled successfully!' message in the console
-5. The project can now be viewed in the browser: http://localhost:3000
-6. You can now create a customer account from this page
-7. To test the backend routes go to the Swagger UI here: http://localhost:8000/docs
-8. You will need to create a shaper account to create an order, click here and fill out all criteria: http://localhost:8000/docs#/Auth/create_account_accounts_post
-9. Now when you go back to the homepage for the site and log in with your customer creds you should be able to select the shaper account you created in Swagger, and create a surfboard order.
-10. If order creation was success, it should populate on the Order History page.
-11. You can also log in as the shaper you created, and update the status of your orders by clicking the Order History page
+1. Make sure to have Docker Desktop downloaded and open, and a Mongo DB Atlas Cloud account
+2. Clone this repo.
+3. Create a .env file in the root directory. Add the following MongoDB variables to this file to connect your database:
+   REACT_APP_API_HOST=http://localhost:8000
+   CONNECTION_STRING='your/mongodb/atlas/cloud/connections/string'
+   DB_NAME=quivr-db
+   USER_NAME=your_username
+   USER_PW=your_password
+4. cd into this project, and run `docker compose up`
+5. Successful launch should build 3 Docker containers and log a 'Compiled successfully!' message in the console
+6. The project can now be viewed in the browser: http://localhost:3000
+7. You can now create a customer account from this page
+8. To test the backend routes go to the Swagger UI here: http://localhost:8000/docs
+9. You will need to create a shaper account to create an order, click here and fill out all criteria: http://localhost:8000/docs#/Auth/create_account_accounts_post
+10. Now when you go back to the homepage for the site and log in with your customer creds you should be able to select the shaper account you created in Swagger, and create a surfboard order.
+11. If order creation was success, it should populate on the Order History page.
+12. You can also log in as the shaper you created, and update the status of your current orders by clicking the Order History page
 
 ## App Design
 
