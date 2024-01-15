@@ -45,7 +45,7 @@ To view this project locally:
 
 1. Make sure to have Docker Desktop downloaded and open, and a Mongo DB Atlas Cloud account
 2. Clone this repo.
-3. Create a .env file in the root directory. Add the following MongoDB variables to this file to connect your database:
+3. Create a .env file in the root directory. Add the following MongoDB variables to this file to connect your database: <br/>
    REACT_APP_API_HOST=http://localhost:8000 <br/>
    CONNECTION_STRING='your/mongodb/atlas/cloud/connections/string' <br/>
    DB_NAME=quivr-db <br/>
