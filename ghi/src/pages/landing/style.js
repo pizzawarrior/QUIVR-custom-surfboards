@@ -46,25 +46,25 @@ export const Div = styled.div`
   }
 `;
 
-export const OurStory = styled.div`
-  font-size: large;
-  background-color: #e56a4b;
-  display: flex;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 16px 100px;
-  gap: 110px;
-  img {
-    height: 30vh;
-    width: 40vh;
-    padding: 40px;
-  }
-  div {
-    max-width: 75%;
-  }
-`;
+// export const OurStory = styled.div`
+//   font-size: large;
+//   background-color: #e56a4b;
+//   display: flex;
+//   margin-top: 10px;
+//   margin-bottom: 10px;
+//   justify-content: space-evenly;
+//   align-items: center;
+//   padding: 16px 100px;
+//   gap: 110px;
+//   img {
+//     height: 30vh;
+//     width: 40vh;
+//     padding: 40px;
+//   }
+//   div {
+//     max-width: 75%;
+//   }
+// `;
 
 export const AboutUs = styled.div`
   display: flex;
@@ -75,7 +75,7 @@ export const AboutUs = styled.div`
   line-height: 30px;
   background-color: #073e4f;
   color: white;
-  margin-top: 0px;
+  margin-top: 0;
 
   img {
     height: 50vh;
