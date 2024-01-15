@@ -1,4 +1,4 @@
-# QUIVR: custom surfboard ordering made easy
+# QUIVR: Custom surfboard ordering made easy
 
 ### Problem Statement:
 
@@ -14,11 +14,11 @@ QUIVR steps in by streamlining the ordering process: orders are placed with shap
 
 ### User Profiles:
 
-![User_Profile_1](/uploads/79b15a44f94714d26a21361c4c621dfb/User_Profile_1.png)
+![User Profile 1](https://github.com/pizzawarrior/quivr/assets/94874182/f664ebb3-a723-41f1-9611-f844105e31cf)
 
-![User_Profile_2](/uploads/9e88df126f4a751ab31ddcd4dfc19ef8/User_Profile_2.png)
+![User Profile 2](https://github.com/pizzawarrior/quivr/assets/94874182/1571d5da-09b1-4e55-8372-77e9c244321e)
 
-![User_Profile_3](/uploads/3d0c80fceb4133e64e95206da53911d8/User_Profile_3.png)
+![User Profile 3](https://github.com/pizzawarrior/quivr/assets/94874182/a8937864-fb67-41a7-8102-4dde2e3e0619)
 
 ### Technical Details:
 
@@ -63,16 +63,24 @@ To view this project locally:
 
 ## App Design
 
-![Application_Architecture](/uploads/4005e5365eaf00718162d2b959c73112/Application_Architecture.png)
+![Application Architecture](https://github.com/pizzawarrior/quivr/assets/94874182/279f7227-e73e-441e-ba95-bd8bf44cce9b)
 
 ## Endpoints
 
-![Application_Endpoints](/uploads/70296425a95aac25f832cd5bfbea4518/Application_Endpoints.png)
+![Application Endpoints](https://github.com/pizzawarrior/quivr/assets/94874182/40be4743-9f2b-49f4-9744-a36f622d75a1)
 
 ### Backend Auth and the Accounts Model
 
 The Accounts model provides a framework for all necessary data for user accounts.
 
+- id: this is a unique string created by MongoDB.
+- username: a unique string identifier for each user
+- password: the passcode to allow for authentication
+- email: user email address
+- first_name: user first name
+- last_name: user last name
+- phone_number: the user's phone number
+- role: the user role type, which dictates permissions and frontend experience. The possible roles are "customer", "shaper", and "admin".
 - id: this is a unique string created by MongoDB.
 - username: a unique string identifier for each user
 - password: the passcode to allow for authentication
@@ -88,6 +96,11 @@ The backend auth is achieved utilizing the Accounts modal. The important data fo
 
 The Reviews module provides a model for representing reviews. It includes attributes such as:
 
+- id: unique identifier for the review, automatically generated using MongoDB
+- date: string
+- rating: an integer that allows customers to add a rating to a review
+- title: string; title of review
+- description: string; add text to a review
 - id: unique identifier for the review, automatically generated using MongoDB
 - date: string
 - rating: an integer that allows customers to add a rating to a review
@@ -116,8 +129,28 @@ The Orders model represents all of the properties required to create a custome s
 - surfboard_tail_style: string; users select from list of modern options
 - surfboard_glassing: string; users select from list of common options
 - surfboard_desc: string | optional; users can add additional details such as color, or other requests
+- order_id: unique identifier for the review, automatically generated using MongoDB
+- date: string
+- reviewed: boolean; displays the status of whether the order has been reviewed or not
+- order_status: string; displays current status of order, as updated by the shaper
+- customer_username: string; name used when customer creates account
+- surfboard_shaper: string; name selected from options on form
+- surfboard_model: string; name of surfboard model
+- surfboard_length: int; number signifying length of board
+- surfboard_width: int, number signifying width of board
+- surfboard_thickness: int; number signifying thickness of board
+- surfboard_construction: string; describes the foam construction of the board
+- surfboard_fin_system: string; users select their desired modern fin system
+- surfboard_fin_count: int; number of fin plugs on board
+- surfboard_tail_style: string; users select from list of modern options
+- surfboard_glassing: string; users select from list of common options
+- surfboard_desc: string | optional; users can add additional details such as color, or other requests
 
 The only properties that can be updated on this model are whether the order has been reviewed or not, and what the status is.
+
+### Demo Pages
+
+<img width="1721" alt="Home-page" src="https://github.com/pizzawarrior/quivr/assets/94874182/100164dd-7036-437d-9f7f-f27c648767e2">
 
 ## Future Iterations of QUIVR
 
