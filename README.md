@@ -46,11 +46,11 @@ To view this project locally:
 1. Make sure to have Docker Desktop downloaded and open, and a Mongo DB Atlas Cloud account
 2. Clone this repo.
 3. Create a .env file in the root directory. Add the following MongoDB variables to this file to connect your database:
-   REACT_APP_API_HOST=http://localhost:8000
-   CONNECTION_STRING='your/mongodb/atlas/cloud/connections/string'
-   DB_NAME=quivr-db
-   USER_NAME=your_username
-   USER_PW=your_password
+   REACT_APP_API_HOST=http://localhost:8000 <br/>
+   CONNECTION_STRING='your/mongodb/atlas/cloud/connections/string' <br/>
+   DB_NAME=quivr-db <br/>
+   USER_NAME=your_username <br/>
+   USER_PW=your_password <br/>
 4. cd into this project directory and run `docker compose up`
 5. Successful launch should build 3 Docker containers and log a 'Compiled successfully!' message in the console
 6. The project can now be viewed in the browser: http://localhost:3000
