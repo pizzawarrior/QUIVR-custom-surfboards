@@ -7,6 +7,7 @@ services:
     image: mongo:5
     volumes:
       - mongo-data:/data/db
+
   fastapi:
     environment:
       CORS_HOST: http://localhost:3000
@@ -20,6 +21,7 @@ services:
       - 8000:8000
     volumes:
       - ./api:/app
+
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
