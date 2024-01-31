@@ -1,28 +1,20 @@
 import pytest
-from queries.accounts import account_services
 from models.accounts import AccountIn, AccountOutWithHashedPassword
-from authenticator import auth_service
+from authenticator import authenticator
 
 
 """
 This is where we create our fixtures for use in the actual tests.
-UNDER CONSTRUCTION!! THESE ARE NOT CURRENTLY FUNCTIONAL
-Question: Are we actually hashing the paswords at all ?????
 """
 
 
 @pytest.fixture(scope="class")
 def auth_obj():
-    return auth_service
-
-
-"""
-create a new_user OBJECT, do not actually add a user to the db
-"""
+    return authenticator
 
 
 @pytest.fixture(scope="class")
-def dummy_user(hashed_password: str) -> AccountOutWithHashedPassword:
+def dummy_user() -> AccountOutWithHashedPassword:
     new_user = AccountIn(
         username="steveMartin",
         password="123thankyou",
@@ -34,7 +26,7 @@ def dummy_user(hashed_password: str) -> AccountOutWithHashedPassword:
     )
     # now hash the password
     # then set hashed password to hashed_password (these are made up methods for the time being)
-    new_pasword = auth_service.create_hashed_password(password=hashed_password)
+    new_password = authenticator.hash_password(new_user.password)
 
     # then copy all of the params into AccountOutWithHashedPassword
     new_user_params = new_user.copy(update=new_password.dict())
