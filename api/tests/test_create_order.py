@@ -2,10 +2,12 @@ from fastapi.testclient import TestClient
 from main import app
 from queries.orders import OrderQueries
 
-# This will be challenging because of Mongo automatically adding:
-# id, date, and customer_username to the mock order
-# Current Status: test failing because 401 unauthorized. This likely has to do with having to make a mock login event
-
+"""
+In order to make these work we will need to create fixtures to be reused:
+-> 'auth object' (successful hashing of password)
+-> dummy user, with all req'd user attributes from AccountIn (verify)
+-> then we can generate a token
+"""
 
 client = TestClient(app)
 
