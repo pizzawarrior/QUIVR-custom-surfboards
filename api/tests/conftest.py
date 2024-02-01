@@ -15,7 +15,7 @@ def auth_obj():
 
 @pytest.fixture(scope="class")
 def dummy_user() -> AccountOutWithHashedPassword:
-    new_user = AccountIn(
+    info = AccountIn(
         username="steveMartin",
         password="123thankyou",
         email="steve@aol.com",
@@ -24,10 +24,9 @@ def dummy_user() -> AccountOutWithHashedPassword:
         phone_number="555-555-5555",
         role="customer",
     )
-    # now hash the password
-    # then set hashed password to hashed_password
-    hashed_password = authenticator.hash_password(new_user.password)
-
-    # then copy all of the params into AccountOutWithHashedPassword
-    new_user_params = new_user.copy(update=hashed_password.dict())
-    return AccountOutWithHashedPassword(**new_user_params.dict())
+    hashed_password = authenticator.hash_password(info.password)
+    account = info.dict()
+    account["hashed_password"] = hashed_password
+    account["id"] = "123id"
+    del account["password"]
+    return AccountOutWithHashedPassword(**account)

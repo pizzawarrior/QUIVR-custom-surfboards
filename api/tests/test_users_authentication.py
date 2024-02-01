@@ -14,14 +14,9 @@ class TestAuthenticate:
         second_password = authenticator.hash_password(test_password)
         assert first_password is not second_password
 
-    # Current Status: passes, but not while 'dummy_user' is activated-- there is a current error on it
-
     # Test to validate a token is being created for a dummy user
     def test_create_access_token_for_user(self, auth_obj, dummy_user):
         # Tokens are created either when an existing user logs in, or when a user creates an account
         # Encode the token first, then decode it and pull out the username to cross-check. That's all.
         token = auth_obj.get_account_data_for_cookie(account=dummy_user)
-        assert token["username"] == dummy_user.username
-
-    # Current Status: Testing produces error: AttributeError: 'str' object has no attribute 'dict'
-    # -> error exist in 'dummy_user' in conftest, on the new_user_params line
+        assert token[0] == dummy_user.username
