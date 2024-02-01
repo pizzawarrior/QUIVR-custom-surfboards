@@ -1,5 +1,6 @@
 import os
 from fastapi import Depends
+from typing import Optional
 from jwtdown_fastapi.authentication import Authenticator
 from queries.accounts import AccountQueries
 from models.accounts import AccountOutWithHashedPassword, AccountOut
@@ -24,7 +25,11 @@ class QuivrAuthenticator(Authenticator):
 
     def get_account_data_for_cookie(
         self, account: AccountOutWithHashedPassword
-    ):
+    ) -> Optional[str]:
+        if not account or not isinstance(
+            account, AccountOutWithHashedPassword
+        ):
+            return None
         return account.username, AccountOut(**account.dict())
 
 
