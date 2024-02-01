@@ -61,11 +61,26 @@ To view this project locally:
 11. If order creation was successful the order should populate on your Order History page
 12. You can also log in as the shaper you created, and update the status of your current orders by clicking the Order History page
 
+### Manual Testing
+
+To run tests manually, inside of the Docker container:
+
+- Make sure the `Fastapi` Docker container is running
+- In the Docker Desktop app, click on the `Fastapi` container, then on the `Exec` tab
+- Paste the following command into the terminal and press enter: `python -m pytest tests/test_accounts.py`
+- Change the path accordingly to run the other tests
+
+To check the overall test coverage and generate a coverage report:
+
+- Make sure the `Fastapi` Docker container is running
+- In the Docker Desktop app, click on the `Fastapi` container, then on the `Exec` tab
+- Paste into the terminal and run: `coverage run -m pytest -v tests && coverage report -m`
+
 ## App Design
 
 ![Application Architecture](https://github.com/pizzawarrior/quivr/assets/94874182/279f7227-e73e-441e-ba95-bd8bf44cce9b)
 
-## Endpoints
+### Endpoints
 
 ![Application Endpoints](https://github.com/pizzawarrior/quivr/assets/94874182/40be4743-9f2b-49f4-9744-a36f622d75a1)
 
