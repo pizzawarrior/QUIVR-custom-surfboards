@@ -23,3 +23,5 @@ class TestAuthenticate:
     def test_create_access_token_for_no_user(self, auth_obj):
         token = auth_obj.get_account_data_for_cookie(account=None)
         assert token is None
+
+    ##### For more info on testing refer to the reference in .scratch-paper!#####
