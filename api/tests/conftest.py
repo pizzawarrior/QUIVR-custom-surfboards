@@ -25,9 +25,9 @@ def dummy_user() -> AccountOutWithHashedPassword:
         role="customer",
     )
     # now hash the password
-    # then set hashed password to hashed_password (these are made up methods for the time being)
-    new_password = authenticator.hash_password(new_user.password)
+    # then set hashed password to hashed_password
+    hashed_password = authenticator.hash_password(new_user.password)
 
     # then copy all of the params into AccountOutWithHashedPassword
-    new_user_params = new_user.copy(update=new_password.dict())
+    new_user_params = new_user.copy(update=hashed_password.dict())
     return AccountOutWithHashedPassword(**new_user_params.dict())
