@@ -10,6 +10,8 @@ This test checks to see if we can create an order without having token validatio
 In order to test the create_order function we will need to:
 -> Use the fixtures created in conftest.py
 -> Generate a token using dummy_user, then create the order
+
+Question: Can't we refactor this to use the dummy_user variable?
 """
 
 client = TestClient(app)
