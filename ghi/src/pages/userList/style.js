@@ -28,6 +28,7 @@ export const HeaderContainer = styled.div`
   H1 {
     font-family: "Lilita One", sans-serif;
     letter-spacing: 2px;
-    color: #e76215;
+    color: white;
+    text-shadow: 1px 1px 2px #e76215;
   }
 `;

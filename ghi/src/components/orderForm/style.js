@@ -17,11 +17,13 @@ export const OrderFormStyle = styled.div`
     height: 30vh;
     width: 14em;
     padding-right: 2em;
+    object-fit: contain;
   }
 
   h1 {
     text-align: center;
     color: white;
+    text-shadow: 1px 1px 2px #e76215;
   }
 
   h3 {

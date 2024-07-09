@@ -32,7 +32,7 @@ export default function OrderForm({
   return (
     <>
       <OrderFormStyle>
-        <h1>Create a custom order</h1>
+        <h1>Create a Custom Order</h1>
         <h3>Starting at $849</h3>
         <Container1>
           <select

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Logo = styled.img`
   height: 80px;
-  margin-left: 10px;
+  margin-left: 60px;
 `;
 
 export const NavbarContainer = styled.nav`
@@ -27,6 +27,7 @@ export const RightContainer = styled.div`
   flex: 40%;
   display: flex;
   justify-content: space-evenly;
+  padding-right: 40px;
 `;
 
 export const NavbarInnerContainer = styled.div`
