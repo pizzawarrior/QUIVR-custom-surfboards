@@ -6,7 +6,6 @@ from fastapi import (
     Depends,
 )
 from models.orders import (
-    OrderIn,
     OrdersIn,
     OrderOut,
     OrdersOut,

@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 from queries.client import MongoQueries
 from bson.objectid import ObjectId
-from models.orders import OrderOut, OrderUpdate, OrdersOut, OrdersIn, OrderIn
+from models.orders import OrderOut, OrderUpdate, OrdersOut, OrdersIn
 # import datetime
 from datetime import datetime, timezone
 
