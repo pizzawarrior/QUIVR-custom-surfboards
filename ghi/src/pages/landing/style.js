@@ -64,9 +64,8 @@ export const AboutUs = styled.div`
   img {
     width: 30%;
     margin: auto;
-    /* padding-left: 18em; */
+    padding-left: 10em;
     object-fit: contain;
-    border-radius: 15px;
   }
   div {
     max-width: 50%;

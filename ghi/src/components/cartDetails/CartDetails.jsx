@@ -44,7 +44,7 @@ const CartDetails = ({ order, setShowCart, addToCart, setAddToCart }) => {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    createOrder(addToCart[0]);
+    createOrder(addToCart);
   };
 
   return (

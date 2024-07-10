@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional, List
 
 
 class OrderIn(BaseModel):
@@ -12,7 +13,7 @@ class OrderIn(BaseModel):
     surfboard_fin_count: int
     surfboard_tail_style: str
     surfboard_glassing: str
-    surfboard_desc: str | None
+    surfboard_desc: Optional[str]
 
 
 class OrderOut(BaseModel):
@@ -31,7 +32,7 @@ class OrderOut(BaseModel):
     surfboard_fin_count: int
     surfboard_tail_style: str
     surfboard_glassing: str
-    surfboard_desc: str | None
+    surfboard_desc: Optional[str]
 
 
 class OrderUpdate(BaseModel):
@@ -40,8 +41,8 @@ class OrderUpdate(BaseModel):
 
 
 class OrdersIn(BaseModel):
-    orders: list[OrderIn]
+    orders: List[OrderIn]
 
 
 class OrdersOut(BaseModel):
-    orders: list[OrderOut]
+    orders: List[OrderOut]

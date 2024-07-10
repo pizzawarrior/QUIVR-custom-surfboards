@@ -16,7 +16,7 @@ export const Values = styled.div``;
 export const Container = styled.div`
   position: fixed;
   top: 10vh;
-  bottom: 17vh;
+  bottom: 20vh;
   right: 0;
   width: 30em;
   background: #072c42;
@@ -29,9 +29,8 @@ export const Container = styled.div`
   .statusContainer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 20px;
-    padding: 0 15%;
+    padding: 0 10%;
   }
   #status {
     height: 36px;
@@ -39,18 +38,23 @@ export const Container = styled.div`
 
   #statusBox {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 20px;
   }
 
   button {
     padding: 8px 14px;
     border-radius: 12px;
+    background-color: #e76215;
+    color: white;
   }
 
   h2 {
-    color: #e76215;
+    color: white;
+    text-shadow: 1px 1px 0px #e87c0a;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
   }
 `;
 

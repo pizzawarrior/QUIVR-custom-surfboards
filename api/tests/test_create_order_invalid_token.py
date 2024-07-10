@@ -3,11 +3,15 @@ from main import app
 from queries.orders import OrderQueries
 
 """
-This test checks to see if we can create an order without having a valid token validation
+This test checks to see if we can create an order without having a valid token
 """
 
 """
-Question: Can we refactor this to use the dummy_order variable?
+In order to test the create_order function we will need to:
+-> Use the fixtures created in conftest.py
+-> Generate a token using dummy_user, then create the order
+
+Question: Can't we refactor this to use the dummy_user variable?
 """
 
 client = TestClient(app)
@@ -49,5 +53,6 @@ def test_create_order():
     app.dependency_overrides = {}
 
     # Assert
+    # assert response.status_code == 200
     assert response.status_code == 401
     assert response.json() == expected
