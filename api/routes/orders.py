@@ -7,19 +7,21 @@ from fastapi import (
 )
 from models.orders import (
     OrderIn,
+    OrdersIn,
     OrderOut,
+    OrdersOut,
 )
 
 router = APIRouter()
 
 
-@router.post("/orders", response_model=OrderOut)
+@router.post("/orders", response_model=OrdersOut)
 async def create_order(
-    order: OrderIn,
+    orders_in: OrdersIn,
     queries: OrderQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
-) -> OrderOut:
-    return queries.create(order, customer_username=account_data["username"])
+) -> OrdersOut:
+    return queries.create(orders_in, customer_username=account_data["username"])
 
 
 @router.get("/orders", response_model=List[OrderOut])

@@ -12,7 +12,8 @@ export const ImgBackground = styled.div`
 
   H1 {
     font-family: "Lilita One", sans-serif;
-    color: #e76215;
+    color: white;
+    text-shadow: 1px 1px 2px #e76215;
     letter-spacing: 2px;
   }
 `;

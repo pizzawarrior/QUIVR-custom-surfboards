@@ -7,7 +7,8 @@ export const Title = styled.h1`
   font-size: 40px;
   line-height: 3rem;
   letter-spacing: 4px;
-  color: #f58236;
+  color: #eb8d4f;
+  text-shadow: 0px 0px 5px #0b156e;
 `;
 
 export const LandContainer = styled.div`
@@ -21,11 +22,12 @@ export const LandContainer = styled.div`
 
 export const LandBackground = styled.div`
   background-image: url(${Background});
-  height: 60vh;
+  height: 50vh;
   width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 70px 0;
+  background-position: center top;
+  background-position: center calc(-30vh);
 `;
 
 export const Div = styled.div`
@@ -38,49 +40,32 @@ export const Div = styled.div`
     width: 20vh;
     margin: 8px;
     padding: 50px;
+    object-fit: contain;
   }
 
   h1 {
     color: #0d5274;
+    text-shadow: 1px 1px 0px #e87c0a;
     font-family: "Montserrat", sans-serif;
   }
 `;
-
-// export const OurStory = styled.div`
-//   font-size: large;
-//   background-color: #e56a4b;
-//   display: flex;
-//   margin-top: 10px;
-//   margin-bottom: 10px;
-//   justify-content: space-evenly;
-//   align-items: center;
-//   padding: 16px 100px;
-//   gap: 110px;
-//   img {
-//     height: 30vh;
-//     width: 40vh;
-//     padding: 40px;
-//   }
-//   div {
-//     max-width: 75%;
-//   }
-// `;
 
 export const AboutUs = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 30px 80px;
+  justify-content: center;
+  padding: 30px 0px 30px 80px;
   line-height: 30px;
   background-color: #073e4f;
   color: white;
-  margin-top: 0;
+  margin: auto;
 
   img {
-    height: 50vh;
-    width: 60vh;
-    margin-top: 30px;
+    width: 30%;
+    margin: auto;
+    padding-left: 10em;
+    object-fit: contain;
   }
   div {
     max-width: 50%;

@@ -45,18 +45,18 @@ To view this project locally:
 
 1. Make sure to have Docker Desktop downloaded and open, and a Mongo DB Atlas Cloud account
 2. Clone this repo.
-3. Create a .env file in the root directory. Add the following MongoDB variables to this file to connect your database: <br/>
-   REACT_APP_API_HOST=http://localhost:8000 <br/>
-   CONNECTION_STRING='your/mongodb/atlas/cloud/connections/string' <br/>
-   DB_NAME=quivr-db <br/>
-   USER_NAME=your_username <br/>
-   USER_PW=your_password <br/>
-4. cd into this project directory and run `docker compose up`
+3. Create a `.env` file in the root directory. Add the following MongoDB variables to this file to connect your database: <br/>
+   `REACT_APP_API_HOST=http://localhost:8000` <br/>
+   `CONNECTION_STRING='your/mongodb/atlas/cloud/connections/string'` <br/>
+   `DB_NAME=quivr-db` <br/>
+   `USER_NAME=your_username` <br/>
+   `USER_PW=your_password` <br/>
+4. `cd` into this project directory and run `docker compose up`
 5. Successful launch should build 3 Docker containers and log a 'Compiled successfully!' message in the console
-6. The project can now be viewed in the browser: http://localhost:3000
+6. The project can now be viewed in the browser: `http://localhost:3000`
 7. You can now create a customer account in the browser
-8. To test the backend routes go to the Swagger UI here: http://localhost:8000/docs
-9. You will need to create a shaper account to create an order, click here and fill out all criteria: http://localhost:8000/docs#/Auth/create_account_accounts_post
+8. To test the backend routes go to the Swagger UI here: `http://localhost:8000/docs`
+9. You will need to create a shaper account to create an order, click here and fill out all criteria: `http://localhost:8000/docs#/Auth/create_account_accounts_post`
 10. Now when you go back to the homepage for the site and log in with your customer creds you should be able to select the shaper account you created in Swagger, and create a surfboard order
 11. If order creation was successful the order should populate on your Order History page
 12. You can also log in as the shaper you created, and update the status of your current orders by clicking the Order History page
@@ -175,3 +175,4 @@ The only properties that can be updated on this model are whether the order has 
 - Orders will be searchable by order_id
 - Shapers will be able to bulk-update orders by selecting a checkbox next to each open order, and selecting an order status from a dropdown
 - In-app messaging will connect customers and shapers, should any clarification on orders be required
+- Email capability for when an order status is updated, or a new message is logged

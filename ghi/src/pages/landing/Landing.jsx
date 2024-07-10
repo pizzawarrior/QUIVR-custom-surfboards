@@ -4,7 +4,7 @@ import Surfboard2 from "../../images/Surfboard2.webp";
 import Surfboard3 from "../../images/Surfboard3.webp";
 import Surfboard5 from "../../images/SurfBoard5.webp";
 import Shaper from "../../images/Shaper.jpg";
-import Carousel from "../../components/Carousel/Carousel";
+import Carousel from "../../components/carousel/Carousel";
 import Slider1 from "../../images/Slider1.png";
 import Slider2 from "../../images/Slider2.png";
 import Slider3 from "../../images/Slider3.png";
@@ -29,11 +29,10 @@ const Landing = () => {
             messed up.
           </p>
           <p>
-            {" "}
-            We bring much needed transparency to a process that has been flawed
-            for too long. Curious what the status of your order is? Log in to
-            find out.
+            QUIVR brings much needed transparency to a process that has been
+            flawed for too long.
           </p>
+          <p>Curious what the status of your order is? Log in to find out.</p>
         </div>
         <img src={Shaper} alt="Custom board a shaper made for a client" />
       </AboutUs>

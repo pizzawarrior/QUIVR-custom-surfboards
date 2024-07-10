@@ -1,43 +1,32 @@
 from fastapi import HTTPException, status
 from queries.client import MongoQueries
 from bson.objectid import ObjectId
-from models.orders import OrderIn, OrderOut, OrderUpdate  # OrdersOut, OrdersIn
-
-# from typing import List
-
-import datetime
+from models.orders import OrderOut, OrderUpdate, OrdersOut, OrdersIn, OrderIn
+# import datetime
+from datetime import datetime, timezone
 
 
 class OrderQueries(MongoQueries):
     collection_name = "orders"
 
-    def create(self, order: OrderIn, customer_username: str) -> OrderOut:
-        data = order.dict()
-        data["customer_username"] = customer_username
-        data["order_status"] = "Order received"
-        data["reviewed"] = False
-        now = datetime.datetime.utcnow()
-        data["date"] = now.strftime("%Y-%m-%d, %H:%M")
-        self.collection.insert_one(data)
-        data["order_id"] = str(data["_id"])
-        return OrderOut(**data)
+    def create(self, orders_in: OrdersIn, customer_username: str) -> OrdersOut:
+        orders = []
+        for order in orders_in.orders:
+            data = order.dict()
+            data["customer_username"] = customer_username
+            data["order_status"] = "Order received"
+            data["reviewed"] = False
+            now = datetime.now(timezone.utc)
+            data["date"] = now.strftime("%Y-%m-%d, %H:%M")
+            orders.append(data)
 
-    # def create(
-    # self,
-    # orders: List(OrdersIn),
-    # customer_username: str) -> OrdersOut:
-    #     result = []
-    #     for order in orders:
-    #         order = order.dict()
-    #         order["customer_username"] = customer_username
-    #         order["order_status"] = "Order received"
-    #         order["reviewed"] = False
-    #         now = datetime.datetime.utcnow()
-    #         order["date"] = now.strftime("%Y-%m-%d, %H:%M")
-    #         result.append(order)
-    #     self.collection.insert_many(result)
-    #     order["order_id"] = str(order["_id"])
-    #     return OrdersOut(**order)
+        result = self.collection.insert_many(orders)
+
+        for i, oid in enumerate(result.inserted_ids):
+            orders[i]["order_id"] = str(oid)
+
+        orders_out = [OrderOut(**order) for order in orders]
+        return OrdersOut(orders=orders_out)
 
     def list_orders(self) -> OrderOut:
         orders = []

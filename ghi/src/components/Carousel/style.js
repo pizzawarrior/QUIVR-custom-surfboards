@@ -5,10 +5,10 @@ export const CarouselContainer = styled.div`
   overflow: hidden;
   background-color: #f7e7be;
 
-  //arrow container: use for arrow spacing
+  // arrow container: use for arrow spacing
   .container {
     display: flex;
-    gap: 55em;
+    gap: 61em;
     padding-left: 21.2em;
   }
 `;

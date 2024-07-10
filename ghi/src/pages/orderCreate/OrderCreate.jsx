@@ -67,7 +67,9 @@ const OrderCreate = () => {
       surfboard_desc,
     };
     setAddToCart([...addToCart, order]);
-    handleClear();
+    if (setAddToCart.length > 0) {
+      handleClear();
+    }
   }
   // console.log(addToCart);
 
