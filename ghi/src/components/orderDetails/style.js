@@ -32,6 +32,7 @@ export const Container = styled.div`
     gap: 20px;
     padding: 0 10%;
   }
+
   #status {
     height: 36px;
   }
