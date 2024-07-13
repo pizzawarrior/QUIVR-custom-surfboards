@@ -7,8 +7,7 @@ export const Title = styled.h1`
   font-size: 40px;
   line-height: 3rem;
   letter-spacing: 4px;
-  color: #eb8d4f;
-  text-shadow: 0px 0px 5px #0b156e;
+  color: #f5cf25;
 `;
 
 export const LandContainer = styled.div`
@@ -57,7 +56,7 @@ export const AboutUs = styled.div`
   justify-content: center;
   padding: 30px 0px 30px 80px;
   line-height: 30px;
-  background-color: #073e4f;
+  background-color: #0b1c40;
   color: white;
   margin: auto;
 
