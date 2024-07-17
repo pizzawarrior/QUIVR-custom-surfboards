@@ -1,5 +1,5 @@
 import pytest
-from models.orders import OrderIn, OrderOut
+from models.orders import OrderIn, OrdersIn, OrderOut
 from models.accounts import AccountIn, AccountOutWithHashedPassword
 from authenticator import authenticator
 
@@ -59,5 +59,18 @@ def dummy_order(dummy_user) -> OrderOut:
 
 
 @pytest.fixture(scope="class")
-def valid_token(auth_obj, dummy_user):
-    return auth_obj.get_account_data_for_cookie(account=dummy_user)[1]
+def dummy_order_2() -> OrdersIn:
+    order = OrderIn(
+        surfboard_shaper="Channel Islands",
+        surfboard_model="Al Merrick",
+        surfboard_length=5.8,
+        surfboard_width=18.75,
+        surfboard_thickness=2.5,
+        surfboard_construction="EPS",
+        surfboard_fin_system="Future",
+        surfboard_fin_count=3,
+        surfboard_tail_style="squash",
+        surfboard_glassing="4 x 4",
+        surfboard_desc="A fast and responsive board",
+    )
+    return OrdersIn(orders=[order])

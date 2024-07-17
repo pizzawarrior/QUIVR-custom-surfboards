@@ -19,7 +19,7 @@ client = TestClient(app)
 
 class CreateOrderQueries:
     def create_order(self, order):
-        result = {"order_id": 5150}
+        result = {"order_id": "5150"}
         result.update(order)
         return result
 

@@ -21,9 +21,9 @@ client = TestClient(app)
 
 class CreateOrderQueries:
     def create(self, orders, customer_username):
-        order = orders.orders[0] # Access the first order in the list
+        order = orders.orders[0]  # Access the first order in the list
         result = {
-            "order_id": 5150,
+            "order_id": "5150",
             "date": "2024-01-15, 22:14",
             "reviewed": False,
             "order_status": "Order received",
