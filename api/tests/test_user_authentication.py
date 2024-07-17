@@ -5,10 +5,10 @@ import pytest
 @pytest.mark.usefixtures("dummy_user")
 class TestAuthenticate:
     # Test the hashed_password method to make sure that the same password input will not return the same hashed password
-    def test_password_hash(self, auth_job):
+    def test_password_hash(self, auth_obj):
         test_password = "123123123"
-        first_password = auth_job.hash_password(test_password)
-        second_password = auth_job.hash_password(test_password)
+        first_password = auth_obj.hash_password(test_password)
+        second_password = auth_obj.hash_password(test_password)
         assert first_password is not second_password
 
     # Test to validate a token is being created for a dummy user

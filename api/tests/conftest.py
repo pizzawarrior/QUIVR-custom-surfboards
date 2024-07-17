@@ -1,11 +1,11 @@
 import pytest
-from models.accounts import AccountIn, AccountOutWithHashedPassword
 from models.orders import OrderIn, OrderOut
+from models.accounts import AccountIn, AccountOutWithHashedPassword
 from authenticator import authenticator
 
-##### For more info on testing refer to the reference in .scratch-paper!#####
-
 """
+For more info on testing refer to the reference in .scratch-paper!
+
 This is where we create our fixtures for use in the actual tests.
 """
 
@@ -35,7 +35,7 @@ def dummy_user() -> AccountOutWithHashedPassword:
 
 
 @pytest.fixture(scope="class")
-def dummy_order(customer_username: str) -> OrderOut:
+def dummy_order(dummy_user) -> OrderOut:
     order = OrderIn(
         surfboard_shaper="Rusty",
         surfboard_model="Twin fin",
@@ -52,7 +52,12 @@ def dummy_order(customer_username: str) -> OrderOut:
     data = order.dict()
     data["order_status"] = "Order received"
     data["reviewed"] = False
-    data["customer_username"] = customer_username
-    data["order_id"] = str(data["_id"])
+    data["customer_username"] = dummy_user.username
+    data["order_id"] = "dummy_id"
     data["date"] = "2024-01-15, 22:14"
     return OrderOut(**data)
+
+
+@pytest.fixture(scope="class")
+def valid_token(auth_obj, dummy_user):
+    return auth_obj.get_account_data_for_cookie(account=dummy_user)[1]

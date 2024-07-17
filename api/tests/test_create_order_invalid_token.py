@@ -53,6 +53,5 @@ def test_create_order():
     app.dependency_overrides = {}
 
     # Assert
-    # assert response.status_code == 200
     assert response.status_code == 401
     assert response.json() == expected
