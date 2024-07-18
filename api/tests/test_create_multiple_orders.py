@@ -3,7 +3,6 @@ import pytest
 from unittest.mock import patch
 from main import app
 from queries.orders import OrderQueries
-from models.orders import OrdersOut
 from authenticator import authenticator
 
 
@@ -20,7 +19,7 @@ client = TestClient(app)
 
 
 class CreateOrderQueries:
-    def create(self, orders, customer_username):
+    def create_mock_order(self, orders, customer_username):
         result = []
         for order in orders.orders:
             new_order = {
@@ -50,7 +49,7 @@ class TestUser:
     def test_create_order(self, dummy_user, dummy_order, dummy_order_2):
         with patch.object(
             authenticator, "get_account_data_for_cookie", return_value=(dummy_user.username, dummy_user)), \
-             patch.object(OrderQueries, "create", new=CreateOrderQueries().create):
+             patch.object(OrderQueries, "create", new=CreateOrderQueries().create_mock_order):
 
             def override_get_current_account_data():
                 return {"username": dummy_user.username}
