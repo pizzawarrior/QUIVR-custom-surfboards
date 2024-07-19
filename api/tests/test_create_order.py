@@ -61,7 +61,6 @@ class TestUser:
             }
 
             response = client.post("/orders", json=json, headers=headers)
-            print(response.json())
 
             expected = {
                 "orders": [
@@ -88,6 +87,37 @@ class TestUser:
 
             assert response.status_code == 200
             assert response.json() == expected
+
+            # Clean up dependency overrides
+            app.dependency_overrides = {}
+
+    def test_create_order_invalid_payload(self, dummy_user):
+        with patch.object(
+            authenticator, "get_account_data_for_cookie", return_value=(dummy_user.username, dummy_user)), \
+             patch.object(OrderQueries, "create", new=CreateOrderQueries().create_mock_order):
+
+            def override_get_current_account_data():
+                return {"username": dummy_user.username}
+
+            app.dependency_overrides[authenticator.get_current_account_data] = override_get_current_account_data
+
+            token = "mock_token"
+            headers = {"Authorization": f"Bearer {token}"}
+
+            invalid_json = {
+                "orders": [
+                    {
+                        "surfboard_shaper": "Rusty",
+                        "surfboard_length": 6,
+                        "surfboard_width": 19,
+                    }
+                ]
+            }
+
+            response = client.post("/orders", json=invalid_json, headers=headers)
+
+            assert response.status_code == 422
+            assert "detail" in response.json()
 
             # Clean up dependency overrides
             app.dependency_overrides = {}

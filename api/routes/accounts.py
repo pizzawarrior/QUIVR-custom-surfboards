@@ -44,6 +44,7 @@ async def create_account(
     return AccountToken(account=account, **token.dict())
 
 
+# For admins to add in 'shaper' accounts
 @router.post("/accounts/add", response_model=dict | HttpError)
 async def create_account_without_login(
     info: AccountIn,
