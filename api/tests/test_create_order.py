@@ -11,16 +11,12 @@ from authenticator import authenticator
 This test checks to see if we can create an order with a valid token
 """
 
-"""
-In order to test the create_order function we will need to:
--> Generate a token using dummy_user, then create the order
-"""
 
 client = TestClient(app)
 
 
 class CreateOrderQueries:
-    def create(self, orders, customer_username):
+    def create_mock_order(self, orders, customer_username):
         order = orders.orders[0]  # Access the first order in the list
         result = {
             "order_id": "5150",
@@ -48,7 +44,7 @@ class TestUser:
     def test_create_order(self, dummy_order, dummy_user):
         with patch.object(
             authenticator, "get_account_data_for_cookie", return_value=(dummy_user.username, dummy_user)), \
-             patch.object(OrderQueries, "create", new=CreateOrderQueries().create):
+             patch.object(OrderQueries, "create", new=CreateOrderQueries().create_mock_order):
 
             def override_get_current_account_data():
                 return {"username": dummy_user.username}
