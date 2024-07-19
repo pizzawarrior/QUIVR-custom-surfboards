@@ -55,6 +55,8 @@ class TestUser:
             token = "mock_token"
             headers = {"Authorization": f"Bearer {token}"}
 
+            # This object is shaped this way so that the first order complies with the OrderOut model,
+            # and the second order complies with the OrdersOut model
             json = {
                 "orders": [
                     {
