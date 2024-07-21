@@ -1,10 +1,6 @@
 from authenticator import authenticator
 from queries.orders import OrderQueries
-from typing import List
-from fastapi import (
-    APIRouter,
-    Depends,
-)
+from fastapi import (APIRouter, Depends)
 from models.orders import (
     OrdersIn,
     OrderOut,
@@ -23,14 +19,14 @@ async def create_order(
     return queries.create(orders_in, customer_username=account_data["username"])
 
 
-@router.get("/orders", response_model=List[OrderOut])
-def orders_list(queries: OrderQueries = Depends()):
-    return queries.list_orders()
-
-
 @router.get("/orders/{order_id}", response_model=OrderOut)
 def get_order(order_id: str | int, queries: OrderQueries = Depends()):
     return queries.find_order(order_id)
+
+
+@router.get("/orders", response_model=OrdersOut)
+def orders_list(queries: OrderQueries = Depends()):
+    return {"orders": queries.list_orders()}
 
 
 @router.put("/orders/{order_id}", response_model=dict)

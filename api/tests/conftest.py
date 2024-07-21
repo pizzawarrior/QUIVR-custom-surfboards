@@ -4,9 +4,9 @@ from models.accounts import AccountIn, AccountOutWithHashedPassword
 from authenticator import authenticator
 
 """
-For more info on testing refer to the reference in .scratch-paper!
-
 This is where we create our fixtures for use in the actual tests.
+
+For more info on testing refer to the reference in .scratch-paper!
 """
 
 

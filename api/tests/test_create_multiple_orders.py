@@ -7,13 +7,9 @@ from authenticator import authenticator
 
 
 """
-This test checks to see if we can create an order with a valid token
+This test checks to see if we can create multiple orders with a valid token
 """
 
-"""
-In order to test the create_order function we will need to:
--> Generate a token using dummy_user, then create the order
-"""
 
 client = TestClient(app)
 
@@ -59,6 +55,8 @@ class TestUser:
             token = "mock_token"
             headers = {"Authorization": f"Bearer {token}"}
 
+            # This object is shaped this way so that the first order complies with the OrderOut model,
+            # and the second order complies with the OrdersOut model
             json = {
                 "orders": [
                     {
