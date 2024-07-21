@@ -2,7 +2,6 @@ from fastapi import HTTPException, status
 from queries.client import MongoQueries
 from bson.objectid import ObjectId
 from models.orders import OrderOut, OrderUpdate, OrdersOut, OrdersIn
-# import datetime
 from datetime import datetime, timezone
 
 
@@ -28,7 +27,7 @@ class OrderQueries(MongoQueries):
         orders_out = [OrderOut(**order) for order in orders]
         return OrdersOut(orders=orders_out)
 
-    def list_orders(self) -> OrderOut:
+    def list_orders(self) -> OrdersOut:
         orders = []
         for item in self.collection.find():
             item["order_id"] = str(item["_id"])
