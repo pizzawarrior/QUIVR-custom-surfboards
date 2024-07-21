@@ -1,4 +1,5 @@
 from fastapi import HTTPException, status
+from pydantic import ValidationError
 from queries.client import MongoQueries
 from bson.objectid import ObjectId
 from models.orders import OrderOut, OrderUpdate, OrdersOut, OrdersIn
@@ -11,13 +12,20 @@ class OrderQueries(MongoQueries):
     def create(self, orders_in: OrdersIn, customer_username: str) -> OrdersOut:
         orders = []
         for order in orders_in.orders:
-            data = order.dict()
-            data["customer_username"] = customer_username
-            data["order_status"] = "Order received"
-            data["reviewed"] = False
-            now = datetime.now(timezone.utc)
-            data["date"] = now.strftime("%Y-%m-%d, %H:%M")
-            orders.append(data)
+            try:
+                data = order.dict()
+                data["customer_username"] = customer_username
+                data["order_status"] = "Order received"
+                data["reviewed"] = False
+                now = datetime.now(timezone.utc)
+                data["date"] = now.strftime("%Y-%m-%d, %H:%M")
+                orders.append(data)
+
+            except ValidationError as e:
+                raise HTTPException(
+                    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                    detail=f'Invalid order data: {e.errors()}'
+                )
 
         result = self.collection.insert_many(orders)
 
@@ -50,6 +58,6 @@ class OrderQueries(MongoQueries):
         order = self.collection.update_one(filter_query, update_query)
         if order.matched_count == 0:
             raise HTTPException(
-                status_code=404, detail="Order ID {order_id} not found"
+                status_code=status.HTTP_404_NOT_FOUND, detail="Order ID {order_id} not found"
             )
         return {"message": "Order updated successfully", "order_id": order_id}

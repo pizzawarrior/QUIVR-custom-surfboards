@@ -126,7 +126,7 @@ class TestUser:
     def test_create_order_invalid_token(self, dummy_order, dummy_user):
         with patch.object(
             authenticator, "get_account_data_for_cookie", return_value=(dummy_user.username, dummy_user)), \
-            patch.object(OrderQueries, "create", new=CreateOrderQueries().create_mock_order):
+             patch.object(OrderQueries, "create", new=CreateOrderQueries().create_mock_order):
 
             def override_get_current_account_data():
                 raise HTTPException(status_code=401, detail="Invalid token")
