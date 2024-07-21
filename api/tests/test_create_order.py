@@ -7,12 +7,6 @@ from queries.orders import OrderQueries
 from models.orders import OrdersOut
 from authenticator import authenticator
 
-
-"""
-This test checks to see if we can create an order with a valid token
-"""
-
-
 client = TestClient(app)
 
 
