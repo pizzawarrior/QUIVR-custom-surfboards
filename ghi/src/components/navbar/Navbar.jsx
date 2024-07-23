@@ -32,18 +32,21 @@ function Navbar() {
               {account?.role === "customer" && (
                 <NavbarLink to="/create-order">Create Order</NavbarLink>
               )}
-              <NavbarLink to="/order-history">Order History</NavbarLink>
+
+              <NavbarLink to="/order-history">My Orders</NavbarLink>
             </div>
             <div
               className={
                 account && account?.role !== "customer" ? "vis" : "hidden"
               }
             >
-              <NavbarLink to="/users">Users</NavbarLink>
+              <NavbarLink to="/users">Customer List</NavbarLink>
             </div>
+
             <div className={!account ? "vis" : "hidden"}>
               <NavbarLink to="/login">Login</NavbarLink>
             </div>
+
             <div className={account ? "vis" : "hidden"}>
               <LogoutLink
                 onClick={() => {

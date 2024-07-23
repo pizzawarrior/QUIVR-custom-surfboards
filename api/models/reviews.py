@@ -1,6 +1,5 @@
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel
-from typing import List
 
 
 class ReviewIn(BaseModel):

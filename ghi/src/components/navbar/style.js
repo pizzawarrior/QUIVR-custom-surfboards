@@ -20,14 +20,14 @@ export const NavbarContainer = styled.nav`
 export const LeftContainer = styled.div`
   display: flex;
   justify-content: flex-start;
-  flex: 40%;
+  flex: 35%;
 `;
 
 export const RightContainer = styled.div`
-  flex: 40%;
+  flex: 45%;
   display: flex;
   justify-content: space-evenly;
-  padding-right: 40px;
+  padding-left: 5em;
 `;
 
 export const NavbarInnerContainer = styled.div`

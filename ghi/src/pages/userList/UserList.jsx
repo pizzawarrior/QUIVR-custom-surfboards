@@ -34,7 +34,7 @@ const UserList = () => {
     <ImgBackground>
       <>
         <HeaderContainer>
-          <h1>User List</h1>
+          <h1>Customer List</h1>
           {account?.role === "admin" && (
             <button onClick={() => setShowModal(true)}>Add User</button>
           )}

@@ -20,7 +20,7 @@ app.add_middleware(
 
 @app.get("/")
 def root():
-    return {"message": "Ouch!!! You hit my root."}
+    return {"message": "You may be looking for this: http://localhost:8000/docs#/"}
 
 
 app.include_router(authenticator.router, tags=["Auth"])
