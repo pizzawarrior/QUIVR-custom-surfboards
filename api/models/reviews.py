@@ -22,8 +22,9 @@ class ReviewOut(BaseModel):
     order_id: str
 
 
+# TODO: We are not actually implementing this yet. Would need to update queries/reviews.py and routes/reviews.py
 class ReviewsOut(BaseModel):
-    List[ReviewOut]
+    reviews: List[ReviewOut]
 
 
 class ReviewUpdate(BaseModel):
