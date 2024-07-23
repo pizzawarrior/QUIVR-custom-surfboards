@@ -1,6 +1,6 @@
 from queries.client import MongoQueries
 from fastapi import HTTPException, status, Body
-from models.reviews import ReviewsIn, ReviewsUpdate, ReviewsOut
+from models.reviews import ReviewIn, ReviewUpdate, ReviewOut
 from bson.objectid import ObjectId
 import datetime
 
@@ -8,23 +8,23 @@ import datetime
 class ReviewQueries(MongoQueries):
     collection_name = "reviews"
 
-    def create(self, review: ReviewsIn, customer) -> ReviewsOut:
+    def create(self, review: ReviewIn, customer) -> ReviewOut:
         data = review.dict()
         data["customer"] = customer
         now = datetime.datetime.utcnow()
         data["date"] = now.strftime("%Y-%m-%d, %H:%M")
         self.collection.insert_one(data)
         data["id"] = str(data["_id"])
-        return ReviewsOut(**data)
+        return ReviewOut(**data)
 
-    def get_all_reviews(self) -> ReviewsOut:
+    def get_all_reviews(self) -> ReviewOut:
         results = []
         for item in self.collection.find():
             item["id"] = str(item["_id"])
             results.append(item)
         return results
 
-    def get_one_by_id(self, id: str) -> ReviewsOut:
+    def get_one_by_id(self, id: str) -> ReviewOut:
         if (review := self.collection.find_one({"order_id": id})) is not None:
             review["id"] = str(review["_id"])
             return review
@@ -33,7 +33,7 @@ class ReviewQueries(MongoQueries):
             detail=f"Review with id {id} not found",
         )
 
-    def update(self, id, review: ReviewsUpdate = Body(...)):
+    def update(self, id, review: ReviewUpdate = Body(...)):
         review = {k: v for k, v in review.dict().items() if v is not None}
 
         if len(review) >= 1:

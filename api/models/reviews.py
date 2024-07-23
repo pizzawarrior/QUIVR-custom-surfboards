@@ -1,8 +1,9 @@
 from typing import Optional
 from pydantic import BaseModel
+from typing import List
 
 
-class ReviewsIn(BaseModel):
+class ReviewIn(BaseModel):
     rating: int
     title: str
     description: str
@@ -10,7 +11,7 @@ class ReviewsIn(BaseModel):
     order_id: str
 
 
-class ReviewsOut(BaseModel):
+class ReviewOut(BaseModel):
     id: str
     date: str
     rating: int
@@ -21,7 +22,11 @@ class ReviewsOut(BaseModel):
     order_id: str
 
 
-class ReviewsUpdate(BaseModel):
+class ReviewsOut(BaseModel):
+    List[ReviewOut]
+
+
+class ReviewUpdate(BaseModel):
     title: Optional[str]
     description: Optional[str]
     rating: Optional[int]
