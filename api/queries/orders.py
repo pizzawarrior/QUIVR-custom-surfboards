@@ -43,7 +43,7 @@ class OrderQueries(MongoQueries):
         return orders
 
     def find_order(self, order_id: str) -> OrderOut:
-        if (order := self.collection.find_one({"_id": ObjectId(order_id)}) is not None):
+        if (order := self.collection.find_one({"_id": ObjectId(order_id)})) is not None:
             order["order_id"] = str(order["_id"])
             return order
         raise HTTPException(

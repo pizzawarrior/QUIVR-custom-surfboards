@@ -17,7 +17,7 @@ class OrderIn(BaseModel):
 
 
 class OrderOut(BaseModel):
-    order_id: str | int
+    order_id: str
     date: str
     reviewed: bool
     order_status: str

@@ -8,10 +8,9 @@ from models.messages import MessageIn, MessageOut, MessagesOut, MessageUpdate
 class MessageQueries(MongoQueries):
     collection_name = 'messages'
 
-    def create_message(self, message: MessageIn, sender, recipient) -> MessageOut:
+    def create_message(self, message: MessageIn, sender) -> MessageOut:
         data = message.dict()
         data["sender"] = sender
-        data["recipient"] = recipient
         now = datetime.now(timezone.utc)
         data["date"] = now.strftime("%Y-%m-%d, %H:%M")
         self.collection.insert_one(data)
@@ -26,7 +25,7 @@ class MessageQueries(MongoQueries):
         return messages
 
     def get_one_message(self, id: str) -> MessageOut:
-        if (message := self.collection.findOne({"order_id": id})) is not None:
+        if (message := self.collection.findOne({"_id": ObjectId(id)})) is not None:
             message[id] = str(message["_id"])
             return message
         raise HTTPException(

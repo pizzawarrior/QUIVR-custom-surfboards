@@ -29,7 +29,7 @@ class AccountQueries(MongoQueries):
     def get_one_by_username(self, username: str):
         result = self.collection.find_one({"username": username})
         if result is None:
-            return None
+            return "No user by that username"
         result["id"] = str(result["_id"])
         return AccountOutWithHashedPassword(**result)
 

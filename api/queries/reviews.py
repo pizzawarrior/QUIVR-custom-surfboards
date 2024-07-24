@@ -25,6 +25,7 @@ class ReviewQueries(MongoQueries):
         return results
 
     def get_one_by_id(self, id: str) -> ReviewOut:
+        # Note that ONLY THIS ONE is searchable by order_id, not id
         if (review := self.collection.find_one({"order_id": id})) is not None:
             review["id"] = str(review["_id"])
             return review

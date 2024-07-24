@@ -42,10 +42,7 @@ def list_reviews(
     response_description="Get a review by order id",
     response_model=ReviewOut,
 )
-def find_review(
-    id: str,
-    repo: ReviewQueries = Depends(),
-):
+def find_review(id: str, repo: ReviewQueries = Depends()):
     return repo.get_one_by_id(id)
 
 
@@ -54,11 +51,10 @@ def find_review(
     response_description="Update review",
     response_model=dict,
 )
-def update_book(
+def update_review(
     id: str,
     repo: ReviewQueries = Depends(),
     review: ReviewUpdate = Body(...),
-    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.update(id, review)
 
@@ -67,6 +63,5 @@ def update_book(
 def delete_review(
     id: str,
     repo: ReviewQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.delete(id)

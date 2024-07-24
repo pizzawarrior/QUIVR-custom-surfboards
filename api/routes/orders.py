@@ -20,7 +20,7 @@ async def create_order(
 
 
 @router.get("/orders/{order_id}", response_model=OrderOut)
-def get_order(order_id: str | int, queries: OrderQueries = Depends()):
+def get_order(order_id: str, queries: OrderQueries = Depends()):
     return queries.find_order(order_id)
 
 
@@ -34,6 +34,5 @@ async def update_order(
     order_id: str,
     update_data: dict,
     queries: OrderQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return queries.update(order_id, update_data)
