@@ -38,11 +38,11 @@ class ReviewQueries(MongoQueries):
 
         if len(review) >= 1:
             self.collection.update_one({"_id": ObjectId(id)}, {"$set": review})
-            return {"message": "updated"}
+            return {"message": "Review has been updated"}
 
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Review with id {id} not found",
+            detail=f"Error: Review with ID: {id} was not found",
         )
 
     def delete(self, id: str):
@@ -53,5 +53,5 @@ class ReviewQueries(MongoQueries):
 
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Review with id {id} not found",
+            detail=f"Error: Review with id {id} was not found",
         )

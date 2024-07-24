@@ -43,13 +43,12 @@ class OrderQueries(MongoQueries):
         return orders
 
     def find_order(self, order_id: str) -> OrderOut:
-        order = self.collection.find_one({"_id": ObjectId(order_id)})
-        if order:
+        if (order := self.collection.find_one({"_id": ObjectId(order_id)}) is not None):
             order["order_id"] = str(order["_id"])
             return order
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Order with ID {order_id} not found",
+            detail=f"Order with ID: {order_id} not found",
         )
 
     def update(self, order_id: str, update_data: dict) -> OrderUpdate:
