@@ -5,6 +5,7 @@ import os
 from routes import accounts
 from routes.orders import router as orders_router
 from routes.reviews import router as reviews_router
+from routes.messages import router as messages_router
 
 
 app = FastAPI()
@@ -27,3 +28,4 @@ app.include_router(authenticator.router, tags=["Auth"])
 app.include_router(accounts.router, tags=["Auth"])
 app.include_router(reviews_router, tags=["reviews"])
 app.include_router(orders_router, tags=["orders"])
+app.include_router(messages_router, tags=["messages"])

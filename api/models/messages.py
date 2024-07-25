@@ -24,7 +24,7 @@ class MessagesOut(BaseModel):
     messages: List[MessageOut]
 
 
-class MessageUpdate:
+class MessageUpdate(BaseModel):
     title: Optional[str]
     body: Optional[str]
     isRead: bool = Field(default=False)

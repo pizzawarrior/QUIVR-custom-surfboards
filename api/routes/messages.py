@@ -8,14 +8,15 @@ from authenticator import authenticator
 from models.messages import MessageIn, MessageOut, MessagesOut, MessageUpdate
 from queries.messages import MessageQueries
 
-router = APIRouter
+router = APIRouter()
 
 
-@router.post("/messages",
-             response_description="Create a new message",
-             status_code=status.HTTP_201_CREATED,
-             response_model=MessageIn,
-             )
+@router.post(
+            "/messages",
+            response_description="Create a new message",
+            status_code=status.HTTP_201_CREATED,
+            response_model=MessageIn,
+            )
 def create_message(
     message: MessageIn,
     repo: MessageQueries = Depends(),
@@ -24,32 +25,35 @@ def create_message(
     return repo.create(message, sender=account_data["username"])
 
 
-@router.get("/messages",
-            response_description="List of all messages",
-            response_model=MessagesOut
-            )
+@router.get(
+        "/messages",
+        response_description="List of all messages",
+        response_model=MessagesOut
+        )
 def list_messages(repo: MessageQueries = Depends()):
     return {"messages": repo.get_all_messages()}
 
 
-@router.get("/messages/{id}",
-            response_description="Get a single message by id",
-            response_model=MessageOut
-            )
-def get_message(id: str, repo: MessageOut = Depends()):
+@router.get(
+        "/messages/{id}",
+        response_description="Get a single message by id",
+        response_model=MessageOut
+        )
+def get_message(id: str, repo: MessageQueries = Depends()):
     return repo.get_one_message(id)
 
 
-@router.put("/messages/{id}",
-            response_description="Update one message",
-            response_model=MessageOut
-            )
+@router.put(
+        "/messages/{id}",
+        response_description="Update one message",
+        response_model=dict
+        )
 def update_message(
     id: str,
     repo: MessageQueries = Depends(),
     message: MessageUpdate = Body(...),
 ):
-    return repo.updateMessage(id, message)
+    return repo.update(id, message)
 
 
 @router.delete("/messages/{id}", response_description="Delete a message")
