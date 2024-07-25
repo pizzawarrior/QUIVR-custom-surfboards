@@ -2,7 +2,7 @@ from queries.client import MongoQueries
 from fastapi import HTTPException, status, Body
 from bson.objectid import ObjectId
 from datetime import datetime, timezone
-from models.messages import MessageIn, MessageOut, MessagesOut, MessageUpdate
+from models.messages import MessageIn, MessageOut, MessageUpdate
 
 
 class MessageQueries(MongoQueries):
@@ -17,7 +17,7 @@ class MessageQueries(MongoQueries):
         data["id"] = str(data["_id"])
         return MessageOut(**data)
 
-    def get_all_messages(self) -> MessagesOut:
+    def get_all_messages(self) -> MessageOut:
         messages = []
         for item in self.collection.find():
             item["id"] = str(item["_id"])
@@ -37,6 +37,7 @@ class MessageQueries(MongoQueries):
         message = {k: v for k, v in message.dict().items() if v is not None}
         now = datetime.now(timezone.utc)
         message["date"] = now.strftime("%Y-%m-%d, %H:%M")
+        message["is_read"] = False
 
         if (len(message) >= 1):
             self.collection.update_one({"_id": ObjectId(id)}, {"$set": message})

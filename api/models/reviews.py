@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -19,11 +19,6 @@ class ReviewOut(BaseModel):
     customer: str
     shaper: str
     order_id: str
-
-
-# TODO: We are not actually implementing this yet. Would need to update queries/reviews.py and routes/reviews.py
-class ReviewsOut(BaseModel):
-    reviews: List[ReviewOut]
 
 
 class ReviewUpdate(BaseModel):

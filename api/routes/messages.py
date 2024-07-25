@@ -4,8 +4,9 @@ from fastapi import (
     Body,
     Depends,
 )
+from typing import List
 from authenticator import authenticator
-from models.messages import MessageIn, MessageOut, MessagesOut, MessageUpdate
+from models.messages import MessageIn, MessageOut, MessageUpdate
 from queries.messages import MessageQueries
 
 router = APIRouter()
@@ -28,10 +29,10 @@ def create_message(
 @router.get(
         "/messages",
         response_description="List of all messages",
-        response_model=MessagesOut
+        response_model=List[MessageOut]
         )
 def list_messages(repo: MessageQueries = Depends()):
-    return {"messages": repo.get_all_messages()}
+    return repo.get_all_messages()
 
 
 @router.get(
