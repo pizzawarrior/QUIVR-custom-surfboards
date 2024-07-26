@@ -11,7 +11,7 @@ export const ordersApi = createApi({
       query: (data) => ({
         url: "/orders",
         method: "POST",
-        body: { orders: data },
+        body: data,
         credentials: "include",
       }),
       invalidatesTags: ["Order"],

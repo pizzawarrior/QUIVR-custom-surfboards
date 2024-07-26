@@ -21,12 +21,12 @@ const OrderHistory = () => {
     }
     if (allOrders && account?.role === "customer") {
       console.log(allOrders);
-      let list = allOrders["orders"].filter(
+      let list = allOrders.filter(
         (item) => item.customer_username === account.username
       );
       setOrders(list);
     } else if (allOrders && account?.role === "shaper") {
-      let list = allOrders["orders"].filter(
+      let list = allOrders.filter(
         (item) => item.surfboard_shaper === account.username
       );
       setOrders(list);

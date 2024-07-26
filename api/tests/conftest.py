@@ -1,5 +1,6 @@
 import pytest
-from models.orders import OrderIn, OrdersIn, OrderOut
+from typing import List
+from models.orders import OrderIn, OrderOut
 from models.accounts import AccountIn, AccountOutWithHashedPassword
 from authenticator import authenticator
 
@@ -59,7 +60,7 @@ def dummy_order(dummy_user) -> OrderOut:
 
 
 @pytest.fixture(scope="class")
-def dummy_order_2() -> OrdersIn:
+def dummy_order_2() -> List[OrderIn]:
     order = OrderIn(
         surfboard_shaper="Channel Islands",
         surfboard_model="Al Merrick",
@@ -73,4 +74,4 @@ def dummy_order_2() -> OrdersIn:
         surfboard_glassing="4 x 4",
         surfboard_desc="A fast and responsive board",
     )
-    return OrdersIn(orders=[order])
+    return order

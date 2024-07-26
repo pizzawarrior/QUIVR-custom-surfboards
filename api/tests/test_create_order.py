@@ -4,34 +4,35 @@ from fastapi import HTTPException
 from unittest.mock import patch
 from main import app
 from queries.orders import OrderQueries
-from models.orders import OrdersOut
+from models.orders import OrderOut
 from authenticator import authenticator
 
 client = TestClient(app)
 
 
 class CreateOrderQueries:
-    def create_mock_order(self, orders, customer_username):
-        order = orders.orders[0]  # Access the first order in the list
-        result = {
-            "order_id": "5150",
-            "date": "2024-01-15, 22:14",
-            "reviewed": False,
-            "order_status": "Order received",
-            "customer_username": customer_username,
-            "surfboard_shaper": order.surfboard_shaper,
-            "surfboard_model": order.surfboard_model,
-            "surfboard_length": order.surfboard_length,
-            "surfboard_width": order.surfboard_width,
-            "surfboard_thickness": order.surfboard_thickness,
-            "surfboard_construction": order.surfboard_construction,
-            "surfboard_fin_system": order.surfboard_fin_system,
-            "surfboard_fin_count": order.surfboard_fin_count,
-            "surfboard_tail_style": order.surfboard_tail_style,
-            "surfboard_glassing": order.surfboard_glassing,
-            "surfboard_desc": order.surfboard_desc,
-        }
-        return OrdersOut(orders=[result])
+    def create_mock_order(self, orders, customer_username) -> OrderOut:
+        result = []
+        for order in orders:
+            result.append({
+                "order_id": "5150",
+                "date": "2024-01-15, 22:14",
+                "reviewed": False,
+                "order_status": "Order received",
+                "customer_username": customer_username,
+                "surfboard_shaper": order.surfboard_shaper,
+                "surfboard_model": order.surfboard_model,
+                "surfboard_length": order.surfboard_length,
+                "surfboard_width": order.surfboard_width,
+                "surfboard_thickness": order.surfboard_thickness,
+                "surfboard_construction": order.surfboard_construction,
+                "surfboard_fin_system": order.surfboard_fin_system,
+                "surfboard_fin_count": order.surfboard_fin_count,
+                "surfboard_tail_style": order.surfboard_tail_style,
+                "surfboard_glassing": order.surfboard_glassing,
+                "surfboard_desc": order.surfboard_desc,
+            })
+        return result
 
 
 @pytest.mark.usefixtures("auth_obj", "dummy_user", "dummy_order")
@@ -49,17 +50,11 @@ class TestUser:
             token = "mock_token"
             headers = {"Authorization": f"Bearer {token}"}
 
-            json = {
-                "orders": [
-                    dummy_order.dict()
-                ]
-            }
+            json = [dummy_order.dict()]
 
             response = client.post("/orders", json=json, headers=headers)
 
-            expected = {
-                "orders": [
-                    {
+            expected = [{
                         "order_id": "5150",
                         "date": "2024-01-15, 22:14",
                         "reviewed": False,
@@ -76,9 +71,7 @@ class TestUser:
                         "surfboard_tail_style": dummy_order.surfboard_tail_style,
                         "surfboard_glassing": dummy_order.surfboard_glassing,
                         "surfboard_desc": dummy_order.surfboard_desc,
-                    }
-                ]
-            }
+                    }]
 
             assert response.status_code == 200
             assert response.json() == expected
@@ -99,15 +92,11 @@ class TestUser:
             token = "mock_token"
             headers = {"Authorization": f"Bearer {token}"}
 
-            invalid_json = {
-                "orders": [
-                    {
+            invalid_json = [{
                         "surfboard_shaper": "Rusty",
                         "surfboard_length": 6,
                         "surfboard_width": 19,
-                    }
-                ]
-            }
+                        }]
 
             response = client.post("/orders", json=invalid_json, headers=headers)
 
@@ -130,11 +119,7 @@ class TestUser:
             token = "invalid_token"
             headers = {"Authorization": f"Bearer {token}"}
 
-            json = {
-                "orders": [
-                    dummy_order.dict()
-                ]
-            }
+            json = [dummy_order.dict()]
 
             response = client.post("/orders", json=json, headers=headers)
             print(response.json())

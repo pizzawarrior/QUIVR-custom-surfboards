@@ -38,11 +38,3 @@ class OrderOut(BaseModel):
 class OrderUpdate(BaseModel):
     order_status: str
     reviewed: bool
-
-
-class OrdersIn(BaseModel):
-    orders: List[OrderIn]
-
-
-class OrdersOut(BaseModel):
-    orders: List[OrderOut]

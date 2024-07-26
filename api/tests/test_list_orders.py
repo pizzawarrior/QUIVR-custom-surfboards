@@ -19,7 +19,7 @@ class TestUser:
         with patch.object(OrderQueries, "list_orders", new=EmptyOrderQueries().list_orders):
             response = client.get("/orders")
 
-            expected = {"orders": []}
+            expected = []
 
             # Assert
             assert response.status_code == 200
@@ -36,12 +36,10 @@ class TestUser:
         with patch.object(OrderQueries, "list_orders", new=MockOrderQueriesWithData().list_orders):
             response = client.get("/orders")
 
-            expected = {
-                "orders": [
+            expected = [
                     dummy_order.dict(),
                     dummy_order.dict()
                 ]
-            }
 
             assert response.status_code == 200
             assert response.json() == expected

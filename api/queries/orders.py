@@ -1,17 +1,18 @@
 from fastapi import HTTPException, status
 from pydantic import ValidationError
+from typing import List
+from datetime import datetime, timezone
 from queries.client import MongoQueries
 from bson.objectid import ObjectId
-from models.orders import OrderOut, OrderUpdate, OrdersOut, OrdersIn
-from datetime import datetime, timezone
+from models.orders import OrderIn, OrderOut, OrderUpdate
 
 
 class OrderQueries(MongoQueries):
     collection_name = "orders"
 
-    def create(self, orders_in: OrdersIn, customer_username: str) -> OrdersOut:
+    def create(self, orders_in: List[OrderIn], customer_username: str) -> List[OrderOut]:
         orders = []
-        for order in orders_in.orders:
+        for order in orders_in:
             try:
                 data = order.dict()
                 data["customer_username"] = customer_username
@@ -33,9 +34,9 @@ class OrderQueries(MongoQueries):
             orders[i]["order_id"] = str(oid)
 
         orders_out = [OrderOut(**order) for order in orders]
-        return OrdersOut(orders=orders_out)
+        return orders_out
 
-    def list_orders(self) -> OrdersOut:
+    def list_orders(self) -> List[OrderOut]:
         orders = []
         for item in self.collection.find():
             item["order_id"] = str(item["_id"])

@@ -17,8 +17,8 @@ client = TestClient(app)
 class CreateOrderQueries:
     def create_mock_order(self, orders, customer_username):
         result = []
-        for order in orders.orders:
-            new_order = {
+        for order in orders:
+            result.append({
                 "order_id": "dummy_id",
                 "date": "2024-01-15, 22:14",
                 "reviewed": False,
@@ -35,9 +35,8 @@ class CreateOrderQueries:
                 "surfboard_tail_style": order.surfboard_tail_style,
                 "surfboard_glassing": order.surfboard_glassing,
                 "surfboard_desc": order.surfboard_desc,
-            }
-            result.append(new_order)
-        return {"orders": result}
+            })
+        return result
 
 
 @pytest.mark.usefixtures("auth_obj", "dummy_user", "dummy_order", "dummy_order_2")
@@ -57,30 +56,15 @@ class TestUser:
 
             # This object is shaped this way so that the first order complies with the OrderOut model,
             # and the second order complies with the OrdersOut model
-            json = {
-                "orders": [
-                    {
-                        "surfboard_shaper": dummy_order.surfboard_shaper,
-                        "surfboard_model": dummy_order.surfboard_model,
-                        "surfboard_length": dummy_order.surfboard_length,
-                        "surfboard_width": dummy_order.surfboard_width,
-                        "surfboard_thickness": dummy_order.surfboard_thickness,
-                        "surfboard_construction": dummy_order.surfboard_construction,
-                        "surfboard_fin_system": dummy_order.surfboard_fin_system,
-                        "surfboard_fin_count": dummy_order.surfboard_fin_count,
-                        "surfboard_tail_style": dummy_order.surfboard_tail_style,
-                        "surfboard_glassing": dummy_order.surfboard_glassing,
-                        "surfboard_desc": dummy_order.surfboard_desc,
-                    },
-                    dummy_order_2.orders[0].dict()
-                ]
-            }
+            json = [
+                    dummy_order.dict(),
+                    dummy_order_2.dict()
+                    ]
 
             response = client.post("/orders", json=json, headers=headers)
             print(response.json())
 
-            expected = {
-                "orders": [
+            expected = [
                     {
                         "order_id": "dummy_id",
                         "date": "2024-01-15, 22:14",
@@ -105,20 +89,19 @@ class TestUser:
                         "reviewed": False,
                         "order_status": "Order received",
                         "customer_username": dummy_user.username,
-                        "surfboard_shaper": dummy_order_2.orders[0].surfboard_shaper,
-                        "surfboard_model": dummy_order_2.orders[0].surfboard_model,
-                        "surfboard_length": dummy_order_2.orders[0].surfboard_length,
-                        "surfboard_width": dummy_order_2.orders[0].surfboard_width,
-                        "surfboard_thickness": dummy_order_2.orders[0].surfboard_thickness,
-                        "surfboard_construction": dummy_order_2.orders[0].surfboard_construction,
-                        "surfboard_fin_system": dummy_order_2.orders[0].surfboard_fin_system,
-                        "surfboard_fin_count": dummy_order_2.orders[0].surfboard_fin_count,
-                        "surfboard_tail_style": dummy_order_2.orders[0].surfboard_tail_style,
-                        "surfboard_glassing": dummy_order_2.orders[0].surfboard_glassing,
-                        "surfboard_desc": dummy_order_2.orders[0].surfboard_desc
+                        "surfboard_shaper": dummy_order_2.surfboard_shaper,
+                        "surfboard_model": dummy_order_2.surfboard_model,
+                        "surfboard_length": dummy_order_2.surfboard_length,
+                        "surfboard_width": dummy_order_2.surfboard_width,
+                        "surfboard_thickness": dummy_order_2.surfboard_thickness,
+                        "surfboard_construction": dummy_order_2.surfboard_construction,
+                        "surfboard_fin_system": dummy_order_2.surfboard_fin_system,
+                        "surfboard_fin_count": dummy_order_2.surfboard_fin_count,
+                        "surfboard_tail_style": dummy_order_2.surfboard_tail_style,
+                        "surfboard_glassing": dummy_order_2.surfboard_glassing,
+                        "surfboard_desc": dummy_order_2.surfboard_desc
                     }
-                ]
-            }
+            ]
 
             assert response.status_code == 200
             assert response.json() == expected
