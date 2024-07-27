@@ -30,6 +30,7 @@ async def create_account(
     response: Response,
     repo: AccountQueries = Depends(),
 ):
+    print("Received account creation request with data:", info.dict())
     hashed_password = authenticator.hash_password(info.password)
 
     try:
@@ -37,7 +38,13 @@ async def create_account(
     except DuplicateAccountError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Cannot create an account with those credentials",
+            detail="Duplicate Account Error: Cannot create an account with provided credentials",
+        )
+    except Exception as e:
+        print("Unexpected error during account creation:", str(e))
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal Server Error"
         )
     form = AccountForm(username=info.username, password=info.password)
     token = await authenticator.login(response, request, form, repo)
@@ -65,7 +72,7 @@ async def create_account_without_login(
     except DuplicateAccountError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Cannot create an account with those credentials",
+            detail="Duplicate Account Error: Cannot create an account with those credentials",
         )
 
 

@@ -1,7 +1,10 @@
 import pytest
+from mongomock import MongoClient
+from unittest.mock import patch
 from typing import List
 from models.orders import OrderIn, OrderOut
 from models.accounts import AccountIn, AccountOutWithHashedPassword
+from queries.accounts import AccountQueries
 from authenticator import authenticator
 
 """
@@ -75,3 +78,22 @@ def dummy_order_2() -> List[OrderIn]:
         surfboard_desc="A fast and responsive board",
     )
     return order
+
+
+@pytest.fixture
+def mock_db():
+    client = MongoClient()
+    db = client.test_database
+    return db
+
+
+@pytest.fixture(scope="function")
+def clean_db(mock_db):
+    mock_db.accounts.delete_many({})
+    yield
+
+
+@pytest.fixture
+def account_queries(mock_db):
+    with patch('queries.client.MongoQueries.collection', mock_db.accounts):
+        yield AccountQueries()

@@ -4,3 +4,4 @@ pytest
 coverage
 pymongo==4.3.3
 jwtdown-fastapi>=0.5.0
+mongomock==4.1.2

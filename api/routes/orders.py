@@ -9,7 +9,6 @@ router = APIRouter()
 
 
 @router.post("/orders", response_model=List[OrderOut])
-# @router.post("/orders", response_model=OrderOut)
 def create_order(
     orders_in: List[OrderIn],
     queries: OrderQueries = Depends(),

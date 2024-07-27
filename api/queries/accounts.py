@@ -1,4 +1,5 @@
 from queries.client import MongoQueries
+from typing import Optional
 from models.accounts import (
     AccountIn,
     AccountOutWithHashedPassword,
@@ -15,23 +16,33 @@ class DuplicateAccountError(ValueError):
 class AccountQueries(MongoQueries):
     collection_name = "accounts"
 
-    def create(self, info: AccountIn, hashed_password: str):
+    def create(self, info: AccountIn, hashed_password: str) -> AccountOutWithHashedPassword:
         account = info.dict()
-        if self.get_one_by_username(account["username"]):
+        # check if username already exists in db
+        if self.get_one_by_username(account["username"]) is not None:
             raise DuplicateAccountError
         account["hashed_password"] = hashed_password
         del account["password"]
-        response = self.collection.insert_one(account)
+        try:
+            response = self.collection.insert_one(account)
+        except Exception as e:
+            print("Error inserting account into the database:", str(e))
+            raise
         if response.inserted_id:
             account["id"] = str(response.inserted_id)
+            print("Account created with username:", account["username"])
         return AccountOutWithHashedPassword(**account)
 
-    def get_one_by_username(self, username: str):
-        result = self.collection.find_one({"username": username})
-        if result is None:
-            return "No user by that username"
-        result["id"] = str(result["_id"])
-        return AccountOutWithHashedPassword(**result)
+    def get_one_by_username(self, username: str) -> Optional[AccountOutWithHashedPassword]:
+        try:
+            result = self.collection.find_one({"username": username})
+            if result is None:
+                return None
+            result["id"] = str(result["_id"])
+            return AccountOutWithHashedPassword(**result)
+        except Exception as e:
+            print(f"Error fetching user by username: {e}")
+            return None
 
     def get_all_accounts(self) -> AccountOut:
         results = []
