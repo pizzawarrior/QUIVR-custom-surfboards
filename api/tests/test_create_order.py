@@ -71,7 +71,7 @@ class TestUser:
                         "surfboard_tail_style": dummy_order.surfboard_tail_style,
                         "surfboard_glassing": dummy_order.surfboard_glassing,
                         "surfboard_desc": dummy_order.surfboard_desc,
-                    }]
+                        }]
 
             assert response.status_code == 200
             assert response.json() == expected

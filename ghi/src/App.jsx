@@ -7,6 +7,7 @@ import Navbar from "./components/navbar/Navbar.jsx";
 import { FooterContainer } from "./components/footer/Footer.jsx";
 import Login from "./pages/login/Login.jsx";
 import NotFound from "./components/errorNotification/NotFound.jsx";
+import Messages from "./pages/messages/Messages.jsx";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/create-order" element={<OrderCreate />} />
         <Route path="/order-history" element={<OrderHistory />} />
         <Route path="/users" element={<UserList />} />
+        <Route path="/messages" element={<Messages />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <FooterContainer />

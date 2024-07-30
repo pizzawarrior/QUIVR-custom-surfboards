@@ -30,7 +30,6 @@ async def create_account(
     response: Response,
     repo: AccountQueries = Depends(),
 ):
-    print("Received account creation request with data:", info.dict())
     hashed_password = authenticator.hash_password(info.password)
 
     try:

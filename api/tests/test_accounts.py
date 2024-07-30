@@ -14,7 +14,7 @@ class EmptyAccountQueries:
         return []
 
 
-def test_get_all_accounts():
+def test_get_all_accounts_when_empty_returns_empty_array():
     app.dependency_overrides[AccountQueries] = EmptyAccountQueries
 
     response = client.get("/accounts")
@@ -26,7 +26,7 @@ def test_get_all_accounts():
 
 
 @pytest.mark.usefixtures("account_queries", "clean_db")
-def test_get_one_by_username(account_queries, clean_db):
+def test_get_one_by_username_returns_the_correct_account(account_queries, clean_db):
     username = "testuser"
     mock_account = {
         "username": username,
@@ -54,14 +54,14 @@ def test_get_one_by_username(account_queries, clean_db):
 
 
 @pytest.mark.usefixtures("account_queries")
-def test_get_one_by_username_not_found(account_queries):
+def test_get_one_by_username_not_found_returns_none(account_queries):
     result = account_queries.get_one_by_username("nonexistentuser")
     assert result is None
 
 
 # This is an end to end test that sends a real request
 @pytest.mark.usefixtures("account_queries", "clean_db")
-def test_create_new_account(account_queries, clean_db):
+def test_create_new_account_creates_new_account(account_queries, clean_db):
     new_account_data = {
         "username": "new_user",
         "password": "new_password",
@@ -79,7 +79,7 @@ def test_create_new_account(account_queries, clean_db):
 
 
 @pytest.mark.usefixtures("account_queries", "clean_db")
-def test_create_duplicate_account(account_queries, clean_db):
+def test_create_duplicate_account_correctly_returns_error(account_queries, clean_db):
     existing_account_data = {
         "username": "existing_user",
         "password": "existing_password",

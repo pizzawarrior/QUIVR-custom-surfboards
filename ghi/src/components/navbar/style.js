@@ -1,9 +1,15 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import QuivrLogo from "../../images/Quivr_logo2.png";
 
-export const Logo = styled.img`
-  height: 80px;
+export const Logo = styled(Link)`
+  background-image: url(${QuivrLogo});
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 15em;
   margin-left: 60px;
+  margin-top: 5px;
 `;
 
 export const NavbarContainer = styled.nav`
@@ -27,7 +33,6 @@ export const RightContainer = styled.div`
   flex: 45%;
   display: flex;
   justify-content: space-evenly;
-  padding-left: 5em;
 `;
 
 export const NavbarInnerContainer = styled.div`
@@ -51,7 +56,7 @@ export const NavbarLink = styled(Link)`
   font-size: 20px;
   text-decoration: none;
   margin-top: 30px;
-  padding-left: 3rem;
+  padding-left: 2rem;
 
   @media (max-width: 700px) {
     display: none;

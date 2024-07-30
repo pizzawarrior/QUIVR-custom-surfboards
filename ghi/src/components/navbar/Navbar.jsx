@@ -22,8 +22,7 @@ function Navbar() {
     <NavbarContainer>
       <NavbarInnerContainer>
         <LeftContainer>
-          <Logo src={QuivrLogo}></Logo>
-          {/* <Logo src={LogoImg}></Logo> */}
+          <Logo to="/"></Logo>
         </LeftContainer>
         <RightContainer>
           <NavbarLinkContainer>
@@ -32,9 +31,10 @@ function Navbar() {
               {account?.role === "customer" && (
                 <NavbarLink to="/create-order">Create Order</NavbarLink>
               )}
-
-              <NavbarLink to="/order-history">My Orders</NavbarLink>
+              <NavbarLink to="/order-history">Orders</NavbarLink>
+              <NavbarLink to="/messages">Messages</NavbarLink>
             </div>
+
             <div
               className={
                 account && account?.role !== "customer" ? "vis" : "hidden"
