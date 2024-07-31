@@ -7,8 +7,6 @@ import SendMessageModal from "../../components/sendMessageModal/SendMessageModal
 import { Wrapper } from "../../constants";
 import { Button1 } from "./style";
 
-// TODO: use orderDetails as a reference
-
 const Messages = () => {
   const navigate = useNavigate();
 

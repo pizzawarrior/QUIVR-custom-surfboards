@@ -4,6 +4,7 @@ import { Button1, Wrapper } from "./style";
 import { useCreateMessageMutation } from "../../app/messagesSlice";
 // import { useGetAccountsByRoleQuery } from "../../app/authSlice";
 
+// TODO:
 // if role == customer, then recipient is a list of shapers
 // if role == shaper, then recipient is a list of customers where order["customer"] == customer && order["shaper"] == shaper
 
@@ -20,17 +21,6 @@ const SendMessageModal = ({ setShowModal, shaper }) => {
     setRecipient(null);
     setShowModal(false);
   };
-
-  // const handleCreate = () => {
-  //   const message = {
-  //     title: title,
-  //     body: body,
-  //     recipient: recipient,
-  //   };
-
-  //   createMessage(message);
-
-  // setShowModal(false)
 
   const handleCreate = async (e) => {
     e.preventDefault();
