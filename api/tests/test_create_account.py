@@ -8,6 +8,8 @@ import time
 
 client = TestClient(app)
 
+# TODO: Update this test to actually work
+
 
 # Integration test using mocks
 class CreateAccountQueries:
@@ -68,26 +70,26 @@ def test_create_account_integration(dummy_user):
     assert response_data["token_type"] == "bearer"
 
 
-# @pytest.mark.usefixtures("account_queries")
-# def test_create_duplicate_account(account_queries):
-#     # Data to create a new account
-#     account_data = {
-#         "username": "existing_user",
-#         "password": "password",
-#         "email": "existing_user@example.com",
-#         "first_name": "Existing",
-#         "last_name": "User",
-#         "phone_number": "555-555-5555",
-#         "role": "customer"
-#     }
+@pytest.mark.usefixtures("account_queries")
+def test_create_duplicate_account(account_queries):
+    # Data to create a new account
+    account_data = {
+        "username": "existing_user",
+        "password": "password",
+        "email": "existing_user@example.com",
+        "first_name": "Existing",
+        "last_name": "User",
+        "phone_number": "555-555-5555",
+        "role": "customer"
+    }
 
-#     # Insert the account to simulate an existing user
-#     account_queries.create(AccountIn(**account_data), "hashed_password")
+    # Insert the account to simulate an existing user
+    account_queries.create(AccountIn(**account_data), "hashed_password")
 
-#     # Try creating the same account again
-#     with patch('authenticator.QuivrAuthenticator.hash_password', return_value="hashed_password"):
-#         response = client.post("/accounts", json=account_data)
+    # Try creating the same account again
+    with patch('authenticator.QuivrAuthenticator.hash_password', return_value="hashed_password"):
+        response = client.post("/accounts", json=account_data)
 
-#     # Assert the response
-#     assert response.status_code == 400
-#     assert response.json()["detail"] == "Duplicate Account Error: Cannot create an account with provided credentials"
+    # Assert the response
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Duplicate Account Error: Cannot create an account with provided credentials"

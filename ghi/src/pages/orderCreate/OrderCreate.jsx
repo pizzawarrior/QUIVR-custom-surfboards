@@ -66,7 +66,9 @@ const OrderCreate = () => {
       surfboard_glassing,
       surfboard_desc,
     };
+
     setAddToCart([...addToCart, order]);
+    // if order gets added to cart then clear it so another order can be added
     if (setAddToCart.length > 0) {
       handleClear();
     }

@@ -6,7 +6,6 @@ class MessageIn(BaseModel):
     title: Optional[str]
     body: str
     is_read: bool = Field(default=False)
-    sender: str
     recipient: str
 
 

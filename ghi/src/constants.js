@@ -124,7 +124,7 @@ export const AccountForm = styled.div`
   }
 `;
 
-export const OrderOptions = [
+export const OrderStatusOptions = [
   "Order Received",
   "Foam being cut",
   "Sent to glassing",

@@ -2,7 +2,7 @@ import { useState } from "react";
 import ReviewModal from "../reviewModal/ReviewModal";
 import Review from "../review/Review";
 import { useUpdateOrderMutation } from "../../app/ordersSlice";
-import { OrderOptions } from "../../constants";
+import { OrderStatusOptions } from "../../constants";
 import {
   DetailsContainer,
   Labels,
@@ -96,7 +96,7 @@ const OrderDetails = ({ order, showDetails, setShowDetails, status, role }) => {
                   required
                 >
                   <option>Choose a status...</option>
-                  {OrderOptions.map((item, index) => (
+                  {OrderStatusOptions.map((item, index) => (
                     <option key={index} value={item}>
                       {item}
                     </option>

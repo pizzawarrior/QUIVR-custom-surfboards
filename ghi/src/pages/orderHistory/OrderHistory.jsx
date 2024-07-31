@@ -11,6 +11,7 @@ const OrderHistory = () => {
   const navigate = useNavigate();
   const { data: account, isLoading } = useGetTokenQuery();
   const { data: allOrders, isLoading: ordersLoading } = useGetAllOrdersQuery();
+
   const [orders, setOrders] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
   const [detailedOrder, setDetailedOrder] = useState({});
@@ -20,7 +21,7 @@ const OrderHistory = () => {
       navigate("/");
     }
     if (allOrders && account?.role === "customer") {
-      console.log(allOrders);
+      // console.log(allOrders);
       let list = allOrders.filter(
         (item) => item.customer_username === account.username
       );
