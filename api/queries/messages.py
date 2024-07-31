@@ -48,7 +48,7 @@ class MessageQueries(MongoQueries):
         )
 
     def delete(self, id: str):
-        delete_message = self.collection.deleteOne(
+        delete_message = self.collection.delete_one(
             {"_id": ObjectId(id)}
         )
         if (delete_message.deleted_count == 1):
