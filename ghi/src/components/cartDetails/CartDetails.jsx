@@ -33,6 +33,11 @@ const CartDetails = ({ order, setShowCart, addToCart, setAddToCart }) => {
 
   const navigate = useNavigate();
 
+  const handleCreate = async (e) => {
+    e.preventDefault();
+    createOrder(addToCart);
+  };
+
   useEffect(() => {
     if (result.isSuccess) {
       navigate("/order-history");
@@ -41,11 +46,6 @@ const CartDetails = ({ order, setShowCart, addToCart, setAddToCart }) => {
       setErrorMessage("There was an error creating your order");
     }
   }, [result, navigate, setAddToCart]);
-
-  const handleCreate = async (e) => {
-    e.preventDefault();
-    createOrder(addToCart);
-  };
 
   return (
     <Wrapper>

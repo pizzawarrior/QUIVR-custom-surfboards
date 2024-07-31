@@ -26,6 +26,7 @@ const OrderDetails = ({ order, showDetails, setShowDetails, status, role }) => {
     };
     update(updateVal);
     setShowDetails(false);
+    setNewStatus("");
   };
 
   return (

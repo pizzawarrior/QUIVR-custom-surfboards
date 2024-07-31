@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Button1, Wrapper } from "./style";
 import { useCreateMessageMutation } from "../../app/messagesSlice";
 // import { useGetAccountsByRoleQuery } from "../../app/authSlice";
@@ -7,20 +8,32 @@ import { useCreateMessageMutation } from "../../app/messagesSlice";
 // if role == shaper, then recipient is a list of customers where order["customer"] == customer && order["shaper"] == shaper
 
 const SendMessageModal = ({ setShowModal, shaper }) => {
-  const [recipient, setRecipient] = useState("");
   const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [body, setBody] = useState(null);
+  const [recipient, setRecipient] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [createMessage, result] = useCreateMessageMutation();
 
   const handleCancel = () => {
     setTitle("");
-    setBody("");
-    setRecipient("");
+    setBody(null);
+    setRecipient(null);
     setShowModal(false);
   };
 
-  const handleCreate = () => {
+  // const handleCreate = () => {
+  //   const message = {
+  //     title: title,
+  //     body: body,
+  //     recipient: recipient,
+  //   };
+
+  //   createMessage(message);
+
+  // setShowModal(false)
+
+  const handleCreate = async (e) => {
+    e.preventDefault();
     const message = {
       title: title,
       body: body,
@@ -28,15 +41,15 @@ const SendMessageModal = ({ setShowModal, shaper }) => {
     };
 
     createMessage(message);
+  };
 
+  useEffect(() => {
     if (result.isSuccess) {
       setShowModal(false);
     } else if (result.isError) {
       setErrorMessage("There was an error sending your message");
     }
-  };
-
-  // may need a useEffect() to sync sent messages with the act of creating a message
+  }, [result, setShowModal]);
 
   return (
     <Wrapper>
