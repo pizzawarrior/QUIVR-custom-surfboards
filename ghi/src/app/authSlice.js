@@ -59,6 +59,7 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Account", "Token"],
     }),
+
     getAccountsByUsername: builder.query({
       query: (username) => `/accounts/username/${username}`,
     }),

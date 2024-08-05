@@ -20,6 +20,7 @@ const OrderHistory = () => {
     if (!isLoading && !account) {
       navigate("/");
     }
+
     if (allOrders && account?.role === "customer") {
       // console.log(allOrders);
       let list = allOrders.filter(

@@ -17,8 +17,8 @@ const SendMessageModal = ({ setShowModal, shaper }) => {
 
   const handleCancel = () => {
     setTitle("");
-    setBody(null);
-    setRecipient(null);
+    setBody(undefined);
+    setRecipient(undefined);
     setShowModal(false);
   };
 

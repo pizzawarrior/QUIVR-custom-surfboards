@@ -142,3 +142,53 @@ export const Button1 = styled.button`
   cursor: pointer;
   margin-left: 90%;
 `;
+
+export const ReactTable = styled.table`
+  table {
+    border-spacing: 0;
+    border: 2px solid #2f9f2f;
+    border-radius: 7px;
+    color: white;
+  }
+
+  tr:last-child td {
+    border-bottom: 0;
+  }
+
+  th,
+  td {
+    margin: 0;
+    padding: 0.5rem;
+    border-bottom: 2px solid #2e852e;
+    border-right: 1px solid #2e852e;
+    position: relative;
+  }
+
+  th:last-child,
+  td:last-child {
+    border-right: 0;
+  }
+
+  tr:nth-child(even) {
+    background-color: #01310b;
+  }
+
+  th::before {
+    position: absolute;
+    right: 15px;
+    top: 16px;
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+  }
+
+  th.sort-asc::before {
+    border-bottom: 8px solid white;
+  }
+
+  th.sort-desc::before {
+    border-top: 8px solid white;
+  }
+`;

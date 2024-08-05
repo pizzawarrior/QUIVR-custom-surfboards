@@ -9,7 +9,6 @@ import {
   LogoutLink,
   Logo,
 } from "./style";
-import QuivrLogo from "../../images/Quivr_logo2.png";
 import { useLogoutMutation, useGetTokenQuery } from "../../app/authSlice";
 import { useNavigate } from "react-router-dom";
 
