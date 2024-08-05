@@ -22,7 +22,7 @@ const OrderCreate = () => {
     }
   }, [account, isTokenLoading, navigate]);
 
-  const [surfboard_shaper, setShaper] = useState(null);
+  const [surfboard_shaper, setShaper] = useState(undefined);
   const [surfboard_model, setModel] = useState("");
   const [surfboard_length, setLength] = useState("");
   const [surfboard_width, setWidth] = useState("");
@@ -39,7 +39,7 @@ const OrderCreate = () => {
   if (isLoading || isTokenLoading) return <div>Loading...</div>;
 
   const handleClear = () => {
-    setShaper(null);
+    setShaper(undefined);
     setModel("");
     setLength("");
     setWidth("");

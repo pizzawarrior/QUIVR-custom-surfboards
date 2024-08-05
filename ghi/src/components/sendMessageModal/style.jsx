@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+// this came from cartDetails, can be added to constants
 export const Wrapper = styled.div`
   position: fixed;
   top: 0vh;
@@ -10,16 +11,4 @@ export const Wrapper = styled.div`
   padding: 5em 10em;
   z-index: 2;
   font-family: "Montserrat", sans-serif;
-`;
-
-export const Button1 = styled.button`
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  margin-top: 1rem;
-  background-color: #e76215;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  margin-left: 90%;
 `;

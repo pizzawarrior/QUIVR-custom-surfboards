@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import { useGetTokenQuery } from "../../app/authSlice";
 import { useGetAccountsByRoleQuery } from "../../app/authSlice";
 import SendMessageModal from "../../components/sendMessageModal/SendMessageModal";
-import { Wrapper } from "../../constants";
-import { Button1 } from "./style";
+import { Wrapper, Button1 } from "../../constants";
 
 const Messages = () => {
   const navigate = useNavigate();

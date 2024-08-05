@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Button1, Wrapper } from "./style";
+import { Wrapper } from "./style";
+import { Button1 } from "../../constants";
 import { useCreateMessageMutation } from "../../app/messagesSlice";
-// import { useGetAccountsByRoleQuery } from "../../app/authSlice";
 
 // TODO:
 // if role == customer, then recipient is a list of shapers
@@ -10,8 +10,8 @@ import { useCreateMessageMutation } from "../../app/messagesSlice";
 
 const SendMessageModal = ({ setShowModal, shaper }) => {
   const [title, setTitle] = useState("");
-  const [body, setBody] = useState(null);
-  const [recipient, setRecipient] = useState(null);
+  const [body, setBody] = useState(undefined);
+  const [recipient, setRecipient] = useState(undefined);
   const [errorMessage, setErrorMessage] = useState("");
   const [createMessage, result] = useCreateMessageMutation();
 

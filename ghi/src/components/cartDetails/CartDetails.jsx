@@ -4,6 +4,7 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useCreateOrderMutation } from "../../app/ordersSlice";
+import { Button1 } from "../../constants";
 
 import {
   Wrapper,
@@ -20,7 +21,6 @@ import {
   STH1,
   P1,
   P2,
-  Button1,
   StyledTotal,
 } from "./style";
 
