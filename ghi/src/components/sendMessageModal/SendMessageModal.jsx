@@ -4,11 +4,9 @@ import { Wrapper } from "./style";
 import { Button1 } from "../../constants";
 import { useCreateMessageMutation } from "../../app/messagesSlice";
 
-// TODO:
-// if role == customer, then recipient is a list of shapers
-// if role == shaper, then recipient is a list of customers where order["customer"] == customer && order["shaper"] == shaper
+// TODO: change all <br /> to spacers
 
-const SendMessageModal = ({ setShowModal, shaper }) => {
+const SendMessageModal = ({ setShowModal, account, orders }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState(undefined);
   const [recipient, setRecipient] = useState(undefined);
@@ -41,28 +39,56 @@ const SendMessageModal = ({ setShowModal, shaper }) => {
     }
   }, [result, setShowModal]);
 
+  const renderRecipientOptions = (usernames) => {
+    return usernames.map((username) => (
+      <option key={username} value={username}>
+        {username}
+      </option>
+    ));
+  };
+
+  const recipientSelect = (usernames) => (
+    <select
+      onChange={(e) => setRecipient(e.target.value)}
+      name="recipient"
+      id="recipient"
+      value={recipient}
+    >
+      <option>Choose a recipient...</option>
+      {renderRecipientOptions(usernames)}
+    </select>
+  );
+
+  const getRecipientUsernames = () => {
+    if (orders) {
+      if (account?.role === "customer") {
+        const filteredOrders = orders.filter(
+          (order) => order.customer_username === account.username
+        );
+        return [
+          ...new Set(filteredOrders.map((order) => order.surfboard_shaper)),
+        ];
+      } else if (account?.role === "shaper") {
+        const filteredOrders = orders.filter(
+          (order) => order.surfboard_shaper === account.username
+        );
+        return [
+          ...new Set(filteredOrders.map((order) => order.customer_username)),
+        ];
+      }
+    }
+    return [];
+  };
+
+  const recipientUsernames = getRecipientUsernames();
+
   return (
     <Wrapper>
       {/* TODO: change this to use the IconButton from CartDetails (make it a constant) */}
       <h2 onClick={() => setShowModal(false)}>X</h2>
       <h1>New Message</h1>
       {errorMessage && <h3>{errorMessage}</h3>}
-      <select
-        onChange={(e) => setRecipient(e.target.value)}
-        name="recipient"
-        id="recipient"
-        value={recipient}
-      >
-        <option>Choose a recipient...</option>
-        {shaper &&
-          shaper.map((message) => {
-            return (
-              <option key={message.username} value={message.username}>
-                {message.username}
-              </option>
-            );
-          })}
-      </select>
+      {recipientSelect(recipientUsernames)}
       <br />
 
       <input

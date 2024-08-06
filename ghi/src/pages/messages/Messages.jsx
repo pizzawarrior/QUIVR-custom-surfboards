@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import { useGetTokenQuery } from "../../app/authSlice";
 import { useGetAccountsByRoleQuery } from "../../app/authSlice";
 import { useGetAllMessagesQuery } from "../../app/messagesSlice";
+import { useGetAllOrdersQuery } from "../../app/ordersSlice";
 import SendMessageModal from "../../components/sendMessageModal/SendMessageModal";
-import { Wrapper, Button1, ReactTable } from "../../constants";
+import { Wrapper, Button1 } from "../../constants";
 import SentMessages from "../../components/sentMessages/SentMessages";
 
 const Messages = () => {
@@ -13,8 +14,11 @@ const Messages = () => {
   const { data: account, isLoading: isTokenLoading } = useGetTokenQuery();
   const { data: shaper, isLoading: isShaperLoading } =
     useGetAccountsByRoleQuery("shaper");
+  const { data: customer, isLoading: isCustomerLoading } =
+    useGetAccountsByRoleQuery("customer");
   const { data: allMessages, isLoading: messagesLoading } =
     useGetAllMessagesQuery();
+  const { data: orders, isLoading: ordersLoading } = useGetAllOrdersQuery();
 
   const [showModal, setShowModal] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -30,7 +34,7 @@ const Messages = () => {
 
     if (allMessages && !isTokenLoading) {
       let list = allMessages.filter(
-        (message) => message.sender === account.username
+        (message) => message.sender === account?.username
       );
       setMessages(list);
     } else {
@@ -38,7 +42,13 @@ const Messages = () => {
     }
   }, [account, isTokenLoading, navigate, allMessages]);
 
-  if (isTokenLoading || isShaperLoading || messagesLoading)
+  if (
+    isTokenLoading ||
+    isShaperLoading ||
+    messagesLoading ||
+    isCustomerLoading ||
+    ordersLoading
+  )
     return (
       <Wrapper>
         <h1>Loading...</h1>
@@ -51,7 +61,11 @@ const Messages = () => {
         <>
           <Button1 onClick={addNewMessage}>New Message</Button1>
           {showModal && (
-            <SendMessageModal shaper={shaper} setShowModal={setShowModal} />
+            <SendMessageModal
+              account={account}
+              orders={orders}
+              setShowModal={setShowModal}
+            />
           )}
           {messages && messages.length > 0 && (
             <SentMessages messages={messages} />
