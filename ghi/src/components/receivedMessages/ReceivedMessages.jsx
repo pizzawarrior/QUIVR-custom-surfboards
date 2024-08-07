@@ -1,15 +1,15 @@
 import { useMemo } from "react";
 import SentMessagesTable from "../sentMessagesTable/SentMessagesTable";
 
-const SentMessages = ({ messages }) => {
+const ReceivedMessages = ({ messages }) => {
   const columns = useMemo(
     () => [
       {
-        Header: "Sent Messages",
+        Header: "Received Messages",
         columns: [
           {
-            Header: "Sent To",
-            accessor: "recipient",
+            Header: "Received From",
+            accessor: "sender",
           },
           {
             Header: "Subject",
@@ -32,4 +32,4 @@ const SentMessages = ({ messages }) => {
   return <SentMessagesTable columns={columns} messages={messages} />;
 };
 
-export default SentMessages;
+export default ReceivedMessages;

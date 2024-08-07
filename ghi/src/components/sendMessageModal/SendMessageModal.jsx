@@ -6,7 +6,7 @@ import { useCreateMessageMutation } from "../../app/messagesSlice";
 
 // TODO: change all <br /> to spacers
 
-const SendMessageModal = ({ setShowModal, account, orders }) => {
+const SendMessageModal = ({ setShowModal, account, orders, shaper }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState(undefined);
   const [recipient, setRecipient] = useState(undefined);
@@ -60,14 +60,13 @@ const SendMessageModal = ({ setShowModal, account, orders }) => {
   );
 
   const getRecipientUsernames = () => {
-    if (orders) {
+    if (orders || account) {
+      // if current user is 'customer' return set of shaper's usernames
       if (account?.role === "customer") {
-        const filteredOrders = orders.filter(
-          (order) => order.customer_username === account.username
-        );
         return [
-          ...new Set(filteredOrders.map((order) => order.surfboard_shaper)),
+          ...new Set(shaper.map((shaper_username) => shaper_username.username)),
         ];
+        // otherwise if current user is shaper, return a set of usernames of their own customers
       } else if (account?.role === "shaper") {
         const filteredOrders = orders.filter(
           (order) => order.surfboard_shaper === account.username

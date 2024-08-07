@@ -17,25 +17,31 @@ const OrderHistory = () => {
   const [detailedOrder, setDetailedOrder] = useState({});
 
   useEffect(() => {
-    if (!isLoading && !account) {
+    if (isLoading) return;
+
+    if (!account) {
       navigate("/");
+      return;
     }
 
-    if (allOrders && account?.role === "customer") {
-      // console.log(allOrders);
-      let list = allOrders.filter(
-        (item) => item.customer_username === account.username
-      );
-      setOrders(list);
-    } else if (allOrders && account?.role === "shaper") {
-      let list = allOrders.filter(
-        (item) => item.surfboard_shaper === account.username
-      );
-      setOrders(list);
-    } else {
-      !ordersLoading && setOrders(allOrders);
+    if (allOrders) {
+      let filteredOrders = [];
+
+      if (account.role === "customer") {
+        filteredOrders = allOrders.filter(
+          (item) => item.customer_username === account.username
+        );
+      } else if (account.role === "shaper") {
+        filteredOrders = allOrders.filter(
+          (item) => item.surfboard_shaper === account.username
+        );
+      } else {
+        filteredOrders = allOrders; // Admin can see all orders
+      }
+
+      setOrders(filteredOrders);
     }
-  }, [account, allOrders, isLoading, navigate, ordersLoading]);
+  }, [account, allOrders, isLoading, navigate]);
 
   if (isLoading || ordersLoading)
     return (

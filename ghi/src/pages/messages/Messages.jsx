@@ -8,6 +8,7 @@ import { useGetAllOrdersQuery } from "../../app/ordersSlice";
 import SendMessageModal from "../../components/sendMessageModal/SendMessageModal";
 import { Wrapper, Button1 } from "../../constants";
 import SentMessages from "../../components/sentMessages/SentMessages";
+import ReceivedMessages from "../../components/receivedMessages/ReceivedMessages";
 
 const Messages = () => {
   const navigate = useNavigate();
@@ -21,7 +22,8 @@ const Messages = () => {
   const { data: orders, isLoading: ordersLoading } = useGetAllOrdersQuery();
 
   const [showModal, setShowModal] = useState(false);
-  const [messages, setMessages] = useState([]);
+  const [sentMessages, setSentMessages] = useState([]);
+  const [receivedMessages, setReceivedMessages] = useState([]);
 
   const addNewMessage = () => {
     setShowModal(true);
@@ -33,12 +35,15 @@ const Messages = () => {
     }
 
     if (allMessages && !isTokenLoading) {
-      let list = allMessages.filter(
+      const sentList = allMessages.filter(
         (message) => message.sender === account?.username
       );
-      setMessages(list);
-    } else {
-      setMessages(allMessages);
+      setSentMessages(sentList);
+
+      const receivedList = allMessages.filter(
+        (message) => message.recipient === account?.username
+      );
+      setReceivedMessages(receivedList);
     }
   }, [account, isTokenLoading, navigate, allMessages]);
 
@@ -59,17 +64,29 @@ const Messages = () => {
     <Wrapper>
       {account && (
         <>
+          <h1>Welcome, {account.username}</h1>
           <Button1 onClick={addNewMessage}>New Message</Button1>
           {showModal && (
             <SendMessageModal
               account={account}
               orders={orders}
+              shaper={shaper}
               setShowModal={setShowModal}
             />
           )}
-          {messages && messages.length > 0 && (
-            <SentMessages messages={messages} />
-          )}
+          <div>
+            {sentMessages.length > 0 && (
+              <div>
+                <SentMessages messages={sentMessages} />
+              </div>
+            )}
+            <br />
+            {receivedMessages.length > 0 && (
+              <div>
+                <ReceivedMessages messages={receivedMessages} />
+              </div>
+            )}
+          </div>
         </>
       )}
     </Wrapper>

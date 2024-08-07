@@ -4,7 +4,7 @@ import { ReactTable } from "../../constants";
 
 // for styling use reactTable in /constants
 
-const SentMessagesTable = ({ columns, messages }) => {
+const ReceivedMessagesTable = ({ columns, messages }) => {
   const [filterInput, setFilterInput] = useState("");
 
   const {
@@ -25,7 +25,7 @@ const SentMessagesTable = ({ columns, messages }) => {
 
   const handleFilterChange = (e) => {
     const value = e.target.value || "";
-    setFilter("recipient", value);
+    setFilter("sender", value);
     setFilterInput(value);
   };
 
@@ -34,7 +34,7 @@ const SentMessagesTable = ({ columns, messages }) => {
       <input
         value={filterInput}
         onChange={handleFilterChange}
-        placeholder="Search by recipient"
+        placeholder="Search by sender"
       />
       <ReactTable {...getTableProps()}>
         <thead>
@@ -76,4 +76,4 @@ const SentMessagesTable = ({ columns, messages }) => {
   );
 };
 
-export default SentMessagesTable;
+export default ReceivedMessagesTable;
