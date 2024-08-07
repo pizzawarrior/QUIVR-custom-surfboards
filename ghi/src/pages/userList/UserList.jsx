@@ -8,22 +8,24 @@ import { HeaderContainer, ImgBackground } from "./style";
 import { Table } from "../../constants";
 
 const UserList = () => {
-  const { data: allUsers } = useGetAllAccountsQuery();
-  const { data: orders } = useGetAllOrdersQuery();
-  const { data: account, isLoading } = useGetTokenQuery();
+  const { data: allUsers = [], isLoading: isLoadingUsers } =
+    useGetAllAccountsQuery();
+  const { data: orders = [], isLoading: isLoadingOrders } =
+    useGetAllOrdersQuery();
+  const { data: account, isLoading: isLoadingAccount } = useGetTokenQuery();
   const [userList, setUserList] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLoading) return;
+    if (isLoadingAccount || isLoadingOrders || isLoadingUsers) return;
 
     if (!account) {
       navigate("/");
       return;
     }
 
-    if (!isLoading && account.role === "customer") {
+    if (account.role === "customer") {
       navigate("/create-order");
       return;
     }
@@ -68,7 +70,25 @@ const UserList = () => {
     } else if (account.role === "admin") {
       setUserList(allUsers || []);
     }
-  }, [account, orders, allUsers, isLoading, navigate]);
+  }, [
+    account,
+    orders,
+    allUsers,
+    isLoadingAccount,
+    isLoadingOrders,
+    isLoadingUsers,
+    navigate,
+  ]);
+
+  if (isLoadingAccount || isLoadingOrders || isLoadingUsers) {
+    return (
+      <ImgBackground>
+        <HeaderContainer>
+          <h1>Loading...</h1>
+        </HeaderContainer>
+      </ImgBackground>
+    );
+  }
 
   return (
     <ImgBackground>
