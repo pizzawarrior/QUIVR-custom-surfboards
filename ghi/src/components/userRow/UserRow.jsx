@@ -20,27 +20,34 @@ const UserRow = ({ item, role }) => {
     }
   };
 
-  //   const { first_name, last_name, email, phone_number, username, order_count } =
-  //     item;
+  const {
+    first_name,
+    last_name,
+    email,
+    phone_number,
+    username,
+    order_count,
+    completed_count,
+  } = item;
 
   return (
     <tr>
       <td>
-        {item.first_name} {item.last_name}
+        {first_name} {last_name}
       </td>
       {role === "shaper" ? (
         <>
-          <td>{item.order_count}</td>
-          <td>{item.completed_count}</td>
+          <td>{order_count}</td>
+          <td>{completed_count}</td>
         </>
       ) : (
-        <td>{item.role}</td>
+        <td>{role}</td>
       )}
-      <td>{item.email}</td>
-      <td>{item.phone_number}</td>
+      <td>{email}</td>
+      <td>{phone_number}</td>
       {role === "admin" && (
         <td>
-          <button onClick={() => handleDelete(item.username)}>Delete</button>
+          <button onClick={() => handleDelete(username)}>Delete</button>
         </td>
       )}
     </tr>
