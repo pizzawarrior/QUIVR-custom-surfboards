@@ -26,8 +26,8 @@ const UserRow = ({ item, role }) => {
     email,
     phone_number,
     username,
-    order_count,
-    completed_count,
+    orders_in_progress,
+    orders_completed,
   } = item;
 
   return (
@@ -37,8 +37,8 @@ const UserRow = ({ item, role }) => {
       </td>
       {role === "shaper" ? (
         <>
-          <td>{order_count}</td>
-          <td>{completed_count}</td>
+          <td>{orders_in_progress}</td>
+          <td>{orders_completed}</td>
         </>
       ) : (
         <td>{role}</td>

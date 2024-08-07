@@ -52,19 +52,23 @@ const UserList = () => {
               email: customerData.email,
               phone_number: customerData.phone_number,
               username: customer_username,
-              order_count: 0,
-              completed_count: 0,
+              orders_in_progress: 0,
+              orders_completed: 0,
             });
           }
 
           const existingCustomerData = customerMap.get(customer_username);
-          existingCustomerData.order_count += 1;
+
+          if (order.order_status !== "Completed") {
+            existingCustomerData.orders_in_progress += 1;
+          }
 
           if (order.order_status === "Completed") {
-            existingCustomerData.completed_count += 1;
+            existingCustomerData.orders_completed += 1;
           }
         }
       });
+
       const uniqueCustomers = Array.from(customerMap.values());
       setUserList(uniqueCustomers);
     } else if (account.role === "admin") {
@@ -121,12 +125,7 @@ const UserList = () => {
             </thead>
             <tbody>
               {userList.map((item, index) => (
-                <UserRow
-                  item={item}
-                  role={account.role}
-                  key={index}
-                  completedOrdersCount={item.completed_count}
-                />
+                <UserRow item={item} role={account.role} key={index} />
               ))}
             </tbody>
           </Table>

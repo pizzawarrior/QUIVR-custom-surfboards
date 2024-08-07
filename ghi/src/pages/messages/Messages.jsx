@@ -15,8 +15,6 @@ const Messages = () => {
   const { data: account, isLoading: isTokenLoading } = useGetTokenQuery();
   const { data: shaper, isLoading: isShaperLoading } =
     useGetAccountsByRoleQuery("shaper");
-  const { data: customer, isLoading: isCustomerLoading } =
-    useGetAccountsByRoleQuery("customer");
   const { data: allMessages, isLoading: messagesLoading } =
     useGetAllMessagesQuery();
   const { data: orders, isLoading: ordersLoading } = useGetAllOrdersQuery();
@@ -47,13 +45,7 @@ const Messages = () => {
     }
   }, [account, isTokenLoading, navigate, allMessages]);
 
-  if (
-    isTokenLoading ||
-    isShaperLoading ||
-    messagesLoading ||
-    isCustomerLoading ||
-    ordersLoading
-  )
+  if (isTokenLoading || isShaperLoading || messagesLoading || ordersLoading)
     return (
       <Wrapper>
         <h1>Loading...</h1>
