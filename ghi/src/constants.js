@@ -146,7 +146,7 @@ export const Button1 = styled.button`
 export const ReactTable = styled.table`
   table {
     border-spacing: 0;
-    border: 2px solid #2f9f2f;
+    border: 2px solid #f7e7be;
     border-radius: 7px;
     color: white;
   }
@@ -157,10 +157,11 @@ export const ReactTable = styled.table`
 
   th,
   td {
+    text-align: left;
     margin: 0;
     padding: 0.5rem;
-    border-bottom: 2px solid #2e852e;
-    border-right: 1px solid #2e852e;
+    border-bottom: 2px solid #f7e7be;
+    border-right: 1px solid #f7e7be;
     position: relative;
   }
 
@@ -170,7 +171,7 @@ export const ReactTable = styled.table`
   }
 
   tr:nth-child(even) {
-    background-color: #01310b;
+    background-color: #9cd9e8;
   }
 
   th::before {
@@ -191,4 +192,16 @@ export const ReactTable = styled.table`
   th.sort-desc::before {
     border-top: 8px solid white;
   }
+`;
+
+export const TableInput = styled.input`
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 2px solid #c2aeae;
+  box-shadow: none;
+  color: rgb(74, 71, 71);
+  background-color: #e3e8e5;
 `;

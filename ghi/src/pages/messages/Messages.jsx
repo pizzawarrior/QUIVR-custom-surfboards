@@ -6,9 +6,10 @@ import { useGetAccountsByRoleQuery } from "../../app/authSlice";
 import { useGetAllMessagesQuery } from "../../app/messagesSlice";
 import { useGetAllOrdersQuery } from "../../app/ordersSlice";
 import SendMessageModal from "../../components/sendMessageModal/SendMessageModal";
-import { Wrapper, Button1 } from "../../constants";
 import SentMessages from "../../components/sentMessages/SentMessages";
 import ReceivedMessages from "../../components/receivedMessages/ReceivedMessages";
+import { Wrapper } from "../../constants";
+import { H1, Button1 } from "./style";
 
 const Messages = () => {
   const navigate = useNavigate();
@@ -56,29 +57,23 @@ const Messages = () => {
     <Wrapper>
       {account && (
         <>
-          <h1>Welcome, {account.username}</h1>
-          <Button1 onClick={addNewMessage}>New Message</Button1>
-          {showModal && (
-            <SendMessageModal
-              account={account}
-              orders={orders}
-              shaper={shaper}
-              setShowModal={setShowModal}
-            />
-          )}
           <div>
-            {sentMessages.length > 0 && (
-              <div>
-                <SentMessages messages={sentMessages} />
-              </div>
-            )}
-            <br />
-            {receivedMessages.length > 0 && (
-              <div>
-                <ReceivedMessages messages={receivedMessages} />
-              </div>
+            <H1>Welcome, {account.username}</H1>
+            <Button1 onClick={addNewMessage}>New Message</Button1>
+            {showModal && (
+              <SendMessageModal
+                account={account}
+                orders={orders}
+                shaper={shaper}
+                setShowModal={setShowModal}
+              />
             )}
           </div>
+          {sentMessages.length > 0 && <SentMessages messages={sentMessages} />}
+          <br />
+          {receivedMessages.length > 0 && (
+            <ReceivedMessages messages={receivedMessages} />
+          )}
         </>
       )}
     </Wrapper>

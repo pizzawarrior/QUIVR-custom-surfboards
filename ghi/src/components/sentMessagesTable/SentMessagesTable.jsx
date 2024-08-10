@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useTable, useFilters, useSortBy } from "react-table";
-import { ReactTable } from "../../constants";
-
-// for styling use reactTable in /constants
+import { ReactTable, TableInput } from "../../constants";
 
 const SentMessagesTable = ({ columns, messages }) => {
   const [filterInput, setFilterInput] = useState("");
@@ -31,7 +29,7 @@ const SentMessagesTable = ({ columns, messages }) => {
 
   return (
     <>
-      <input
+      <TableInput
         value={filterInput}
         onChange={handleFilterChange}
         placeholder="Search by recipient"

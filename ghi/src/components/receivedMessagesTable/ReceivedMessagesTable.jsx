@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useTable, useFilters, useSortBy } from "react-table";
-import { ReactTable } from "../../constants";
-
-// for styling use reactTable in /constants
+import { ReactTable, TableInput } from "../../constants";
 
 const ReceivedMessagesTable = ({ columns, messages }) => {
   const [filterInput, setFilterInput] = useState("");
