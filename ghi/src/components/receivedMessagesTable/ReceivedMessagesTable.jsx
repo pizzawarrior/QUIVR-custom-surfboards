@@ -28,8 +28,8 @@ const ReceivedMessagesTable = ({ columns, messages }) => {
   };
 
   return (
-    <>
-      <input
+    <div>
+      <TableInput
         value={filterInput}
         onChange={handleFilterChange}
         placeholder="Search by sender"
@@ -70,7 +70,7 @@ const ReceivedMessagesTable = ({ columns, messages }) => {
           })}
         </tbody>
       </ReactTable>
-    </>
+    </div>
   );
 };
 

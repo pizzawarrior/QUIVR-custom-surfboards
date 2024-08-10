@@ -73,6 +73,7 @@ const OrderHistory = () => {
                   <th>Width</th>
                   <th>Thickness</th>
                   <th>Order Status</th>
+                  <th>Order Details</th>
                 </tr>
               </thead>
               <tbody>

@@ -9,7 +9,7 @@ import SendMessageModal from "../../components/sendMessageModal/SendMessageModal
 import SentMessages from "../../components/sentMessages/SentMessages";
 import ReceivedMessages from "../../components/receivedMessages/ReceivedMessages";
 import { Wrapper } from "../../constants";
-import { H1, Button1 } from "./style";
+import { H1, Button1, Background } from "./style";
 
 const Messages = () => {
   const navigate = useNavigate();
@@ -48,35 +48,41 @@ const Messages = () => {
 
   if (isTokenLoading || isShaperLoading || messagesLoading || ordersLoading)
     return (
-      <Wrapper>
-        <h1>Loading...</h1>
-      </Wrapper>
+      <Background>
+        <Wrapper>
+          <h1>Loading...</h1>
+        </Wrapper>
+      </Background>
     );
 
   return (
-    <Wrapper>
-      {account && (
-        <>
-          <div>
-            <H1>Welcome, {account.username}</H1>
-            <Button1 onClick={addNewMessage}>New Message</Button1>
-            {showModal && (
-              <SendMessageModal
-                account={account}
-                orders={orders}
-                shaper={shaper}
-                setShowModal={setShowModal}
-              />
+    <Background>
+      <Wrapper>
+        {account && (
+          <>
+            <div>
+              <H1>Welcome, {account.username}</H1>
+              <Button1 onClick={addNewMessage}>New Message</Button1>
+              {showModal && (
+                <SendMessageModal
+                  account={account}
+                  orders={orders}
+                  shaper={shaper}
+                  setShowModal={setShowModal}
+                />
+              )}
+            </div>
+            {sentMessages.length > 0 && (
+              <SentMessages messages={sentMessages} />
             )}
-          </div>
-          {sentMessages.length > 0 && <SentMessages messages={sentMessages} />}
-          <br />
-          {receivedMessages.length > 0 && (
-            <ReceivedMessages messages={receivedMessages} />
-          )}
-        </>
-      )}
-    </Wrapper>
+            <br />
+            {receivedMessages.length > 0 && (
+              <ReceivedMessages messages={receivedMessages} />
+            )}
+          </>
+        )}
+      </Wrapper>
+    </Background>
   );
 };
 

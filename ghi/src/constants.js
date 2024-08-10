@@ -144,10 +144,15 @@ export const Button1 = styled.button`
 `;
 
 export const ReactTable = styled.table`
-  table {
-    border-spacing: 0;
-    border: 2px solid #f7e7be;
-    border-radius: 7px;
+  width: 75%;
+  border-spacing: 0;
+  border: 2px solid #f7e7be;
+  border-radius: 7px;
+  color: #0d5274;
+  font-family: "Open Sans", sans-serif;
+
+  thead {
+    font-size: 25px;
     color: white;
   }
 
@@ -197,6 +202,7 @@ export const ReactTable = styled.table`
 export const TableInput = styled.input`
   text-align: center;
   padding: 5px;
+  margin-top: 20px;
   margin-bottom: 10px;
   font-size: 15px;
   border-radius: 5px;

@@ -26,7 +26,7 @@ const SentMessages = ({ messages }) => {
   );
 
   if (!messages || messages.length === 0) {
-    return <h1>No messages to display.</h1>; // Message when there are no messages
+    return <h1>No messages to display.</h1>;
   }
 
   return <SentMessagesTable columns={columns} messages={messages} />;

@@ -28,7 +28,7 @@ const SentMessagesTable = ({ columns, messages }) => {
   };
 
   return (
-    <>
+    <div>
       <TableInput
         value={filterInput}
         onChange={handleFilterChange}
@@ -70,7 +70,7 @@ const SentMessagesTable = ({ columns, messages }) => {
           })}
         </tbody>
       </ReactTable>
-    </>
+    </div>
   );
 };
 

@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import SentMessagesTable from "../sentMessagesTable/SentMessagesTable";
+import ReceivedMessagesTable from "../receivedMessagesTable/ReceivedMessagesTable";
 
 const ReceivedMessages = ({ messages }) => {
   const columns = useMemo(
@@ -26,10 +27,10 @@ const ReceivedMessages = ({ messages }) => {
   );
 
   if (!messages || messages.length === 0) {
-    return <h1>No messages to display.</h1>; // Message when there are no messages
+    return <h1>No messages to display.</h1>;
   }
 
-  return <SentMessagesTable columns={columns} messages={messages} />;
+  return <ReceivedMessagesTable columns={columns} messages={messages} />;
 };
 
 export default ReceivedMessages;
