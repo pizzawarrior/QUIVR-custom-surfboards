@@ -46,6 +46,8 @@ const SentMessagesTable = ({ columns, messages }) => {
                       ? column.isSortedDesc
                         ? "sort-desc"
                         : "sort-asc"
+                      : column.Header === "Sent Messages" // Check if it's the top header
+                      ? "messages-header" // Add specific class here for styling purposes
                       : ""
                   }
                 >

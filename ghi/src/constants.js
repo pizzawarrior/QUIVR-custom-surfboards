@@ -144,16 +144,16 @@ export const Button1 = styled.button`
 `;
 
 export const ReactTable = styled.table`
-  width: 75%;
+  width: 100%;
   border-spacing: 0;
   border: 2px solid #f7e7be;
   border-radius: 7px;
   color: #0d5274;
   font-family: "Open Sans", sans-serif;
 
-  thead {
+  .messages-header {
     font-size: 25px;
-    color: white;
+    color: #e76215;
   }
 
   tr:last-child td {
@@ -202,7 +202,7 @@ export const ReactTable = styled.table`
 export const TableInput = styled.input`
   text-align: center;
   padding: 5px;
-  margin-top: 20px;
+  margin-top: 5em;
   margin-bottom: 10px;
   font-size: 15px;
   border-radius: 5px;

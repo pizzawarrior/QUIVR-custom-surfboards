@@ -46,6 +46,8 @@ const ReceivedMessagesTable = ({ columns, messages }) => {
                       ? column.isSortedDesc
                         ? "sort-desc"
                         : "sort-asc"
+                      : column.Header === "Received Messages" // Check if it's the top header
+                      ? "messages-header" // Add specific class here to grab for styling
                       : ""
                   }
                 >

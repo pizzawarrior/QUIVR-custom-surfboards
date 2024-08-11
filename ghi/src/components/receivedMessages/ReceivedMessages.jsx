@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import SentMessagesTable from "../sentMessagesTable/SentMessagesTable";
 import ReceivedMessagesTable from "../receivedMessagesTable/ReceivedMessagesTable";
 
 const ReceivedMessages = ({ messages }) => {

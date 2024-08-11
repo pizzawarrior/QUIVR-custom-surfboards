@@ -18,15 +18,24 @@ export const H1 = styled.h1`
   color: white;
   text-shadow: 1px 1px 2px #e76215;
   letter-spacing: 2px;
+  grid-column: 1;
 `;
 
 export const Button1 = styled.button`
-  border: none;
+  border: 2px solid white;
   border-radius: 8px;
   padding: 10px 20px;
   background-color: #e76215;
   color: white;
   font-weight: bold;
   cursor: pointer;
-  margin-left: 90%;
+  grid-column: 4;
+  justify-self: end;
+`;
+
+export const TopDiv = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  width: 100%;
 `;

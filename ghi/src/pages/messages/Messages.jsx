@@ -9,7 +9,7 @@ import SendMessageModal from "../../components/sendMessageModal/SendMessageModal
 import SentMessages from "../../components/sentMessages/SentMessages";
 import ReceivedMessages from "../../components/receivedMessages/ReceivedMessages";
 import { Wrapper } from "../../constants";
-import { H1, Button1, Background } from "./style";
+import { H1, Button1, Background, TopDiv } from "./style";
 
 const Messages = () => {
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ const Messages = () => {
       <Wrapper>
         {account && (
           <>
-            <div>
+            <TopDiv>
               <H1>Welcome, {account.username}</H1>
               <Button1 onClick={addNewMessage}>New Message</Button1>
               {showModal && (
@@ -71,7 +71,7 @@ const Messages = () => {
                   setShowModal={setShowModal}
                 />
               )}
-            </div>
+            </TopDiv>
             {sentMessages.length > 0 && (
               <SentMessages messages={sentMessages} />
             )}
