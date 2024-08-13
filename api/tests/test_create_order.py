@@ -127,5 +127,4 @@ class TestUser:
             assert response.status_code == 401
             assert response.json() == {"detail": "Invalid token"}
 
-            # Clean up dependency overrides
             app.dependency_overrides = {}

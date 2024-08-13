@@ -31,6 +31,9 @@ export const Button1 = styled.button`
   cursor: pointer;
   grid-column: 4;
   justify-self: end;
+  &:hover {
+    background-color: #8f3806;
+  }
 `;
 
 export const TopDiv = styled.div`

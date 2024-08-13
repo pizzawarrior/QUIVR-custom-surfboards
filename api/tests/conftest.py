@@ -4,6 +4,7 @@ from unittest.mock import patch
 from typing import List
 from models.orders import OrderIn, OrderOut
 from models.accounts import AccountIn, AccountOutWithHashedPassword
+from models.messages import MessageIn, MessageOut
 from queries.accounts import AccountQueries
 from authenticator import authenticator
 
@@ -97,3 +98,18 @@ def clean_db(mock_db):
 def account_queries(mock_db):
     with patch('queries.client.MongoQueries.collection', mock_db.accounts):
         yield AccountQueries()
+
+
+@pytest.fixture(scope="class")
+def dummy_message(dummy_user) -> MessageOut:
+    message = MessageIn(
+        title="mock_title",
+        body="Hey I really like this surfboard?",
+        is_read=False,
+        recipient="Rusty"
+    )
+    data = message.dict()
+    data["id"] = "mock_id"
+    data["date"] = "2024-01-15, 22:14"
+    data['sender'] = dummy_user.username
+    return MessageOut(**data)

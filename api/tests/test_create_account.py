@@ -8,7 +8,7 @@ import time
 
 client = TestClient(app)
 
-# TODO: Update this test to actually work
+# TODO: Update this test to actually work, current status: 'Unauthorized...'
 
 
 # Integration test using mocks
@@ -24,6 +24,7 @@ class CreateAccountQueries:
             role=info.role,
             hashed_password=hashed_password
         )
+
 
 @pytest.mark.usefixtures("auth_obj", "dummy_user")
 def test_create_account_integration(dummy_user):

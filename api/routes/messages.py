@@ -16,7 +16,7 @@ router = APIRouter()
             "/messages",
             response_description="Create a new message",
             status_code=status.HTTP_201_CREATED,
-            response_model=MessageIn,
+            response_model=MessageOut,
             )
 def create_message(
     message: MessageIn,
