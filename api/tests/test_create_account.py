@@ -4,6 +4,7 @@ from main import app
 from models.accounts import AccountOutWithHashedPassword, AccountIn
 from queries.accounts import AccountQueries
 from unittest.mock import patch
+from authenticator import authenticator
 import time
 
 client = TestClient(app)
@@ -15,7 +16,7 @@ client = TestClient(app)
 class CreateAccountQueries:
     def create_mock_account(self, info, hashed_password) -> AccountOutWithHashedPassword:
         return AccountOutWithHashedPassword(
-            id=1,
+            id="1",
             username=info.username,
             email=info.email,
             first_name=info.first_name,
@@ -26,8 +27,8 @@ class CreateAccountQueries:
         )
 
 
-@pytest.mark.usefixtures("auth_obj", "dummy_user")
-def test_create_account_integration(dummy_user):
+@pytest.mark.usefixtures("auth_obj")
+def test_create_account_integration():
     # Ensure username is unique by providing a new username for each test
     unique_username = f'new_user_{int(time.time())}'
     account_data = {
@@ -47,11 +48,18 @@ def test_create_account_integration(dummy_user):
     mock_account = CreateAccountQueries().create_mock_account(AccountIn(**account_data), mock_hashed_password)
     mock_token = {"access_token": "mock_token", "token_type": "bearer"}
 
+    print("Mocked login token:", mock_token)
+
+    app.dependency_overrides[authenticator.get_current_account_data] = lambda: {"username": dummy_user.username}
+
     with patch('authenticator.QuivrAuthenticator.hash_password', return_value=mock_hashed_password):
         with patch('authenticator.QuivrAuthenticator.login', return_value=mock_token):
             with patch.object(AccountQueries, 'create', return_value=mock_account):
+                with patch.object(AccountQueries, 'get_one_by_username', return_value=None):  # Ensure no existing user
+                    app.dependency_overrides[authenticator.get_account_getter] = lambda: CreateAccountQueries()
+                    app.dependency_overrides[authenticator.get_account_data] = lambda username, accounts: mock_account if username == unique_username else None
 
-                response = client.post("/accounts", json=account_data)
+                    response = client.post("/accounts", json=account_data)
 
     # Print response for debugging
     print("Response status code:", response.status_code)
@@ -60,7 +68,7 @@ def test_create_account_integration(dummy_user):
     # Assert the response
     assert response.status_code == 200
     response_data = response.json()
-    assert response_data["account"]["id"] == 1
+    assert response_data["account"]["id"] == "1"
     assert response_data["account"]["username"] == account_data["username"]
     assert response_data["account"]["email"] == account_data["email"]
     assert response_data["account"]["first_name"] == account_data["first_name"]
@@ -73,7 +81,6 @@ def test_create_account_integration(dummy_user):
 
 @pytest.mark.usefixtures("account_queries")
 def test_create_duplicate_account(account_queries):
-    # Data to create a new account
     account_data = {
         "username": "existing_user",
         "password": "password",
@@ -85,12 +92,17 @@ def test_create_duplicate_account(account_queries):
     }
 
     # Insert the account to simulate an existing user
-    account_queries.create(AccountIn(**account_data), "hashed_password")
+    existing_account = account_queries.create(AccountIn(**account_data), "hashed_password")
 
-    # Try creating the same account again
+    app.dependency_overrides = {}
+
+    # Mock the hashing method to ensure it returns the same hashed password
     with patch('authenticator.QuivrAuthenticator.hash_password', return_value="hashed_password"):
-        response = client.post("/accounts", json=account_data)
+        # Mock the get_one_by_username method to simulate the existing account
+        with patch.object(AccountQueries, 'get_one_by_username', return_value=existing_account):
+            response = client.post("/accounts", json=account_data)
 
-    # Assert the response
     assert response.status_code == 400
     assert response.json()["detail"] == "Duplicate Account Error: Cannot create an account with provided credentials"
+
+    app.dependency_overrides = {}
