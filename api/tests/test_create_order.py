@@ -76,7 +76,6 @@ class TestUser:
             assert response.status_code == 200
             assert response.json() == expected
 
-            # Clean up dependency overrides
             app.dependency_overrides = {}
 
     def test_create_order_invalid_payload(self, dummy_user):

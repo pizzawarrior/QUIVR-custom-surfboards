@@ -32,7 +32,7 @@ const SentMessagesTable = ({ columns, messages }) => {
       <TableInput
         value={filterInput}
         onChange={handleFilterChange}
-        placeholder="Search by recipient"
+        placeholder="Search by recipient..."
       />
       <ReactTable {...getTableProps()}>
         <thead>

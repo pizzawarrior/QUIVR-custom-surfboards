@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Background = styled.div`
   max-width: 1200px;
   margin: auto;
-  background-color: #e3f5fd;
+  background-color: #f2f9fc;
   min-height: 60vh;
   width: 100%;
   overflow-y: scroll;
@@ -15,9 +15,10 @@ export const Background = styled.div`
 
 export const H1 = styled.h1`
   font-family: "Lilita One", sans-serif;
+  font-size: 28px;
   color: white;
   text-shadow: 1px 1px 2px #e76215;
-  letter-spacing: 2px;
+  letter-spacing: 2.5;
   grid-column: 1;
 `;
 

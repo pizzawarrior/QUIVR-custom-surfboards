@@ -7,14 +7,14 @@ from unittest.mock import patch
 from authenticator import authenticator
 import time
 
-client = TestClient(app)
-
 # TODO: Update this test to actually work, current status: 'Unauthorized...'
+
+client = TestClient(app)
 
 
 # Integration test using mocks
-class CreateAccountQueries:
-    def create_mock_account(self, info, hashed_password) -> AccountOutWithHashedPassword:
+class MockAccountQueries:
+    def create(self, info: AccountIn, hashed_password: str) -> AccountOutWithHashedPassword:
         return AccountOutWithHashedPassword(
             id="1",
             username=info.username,
@@ -26,14 +26,16 @@ class CreateAccountQueries:
             hashed_password=hashed_password
         )
 
+    def get_one_by_username(self, username: str):
+        return None  # Simulate that no user already exists
 
 @pytest.mark.usefixtures("auth_obj")
 def test_create_account_integration():
-    # Ensure username is unique by providing a new username for each test
     unique_username = f'new_user_{int(time.time())}'
     account_data = {
         "username": unique_username,
         "password": "new_password",
+        "confirm_password": "new_password",  # Ensure confirm password field is included
         "email": "new_user@example.com",
         "first_name": "New",
         "last_name": "User",
@@ -41,23 +43,18 @@ def test_create_account_integration():
         "role": "customer"
     }
 
-    print("Sending account data:", account_data)
-
-    # Mock the dependencies with valid hashed password and create method
+    # Mock hashed password and token
     mock_hashed_password = "$2b$12$KIXk1m2Gr0wWxVh9d0c47u5Th3M.RuYPxOq5lJ9j9H.aEwKjZ7Meq"
-    mock_account = CreateAccountQueries().create_mock_account(AccountIn(**account_data), mock_hashed_password)
+    mock_account = MockAccountQueries().create(AccountIn(**account_data), mock_hashed_password)
     mock_token = {"access_token": "mock_token", "token_type": "bearer"}
 
-    print("Mocked login token:", mock_token)
-
-    app.dependency_overrides[authenticator.get_current_account_data] = lambda: {"username": dummy_user.username}
-
+    # Mock the dependencies
     with patch('authenticator.QuivrAuthenticator.hash_password', return_value=mock_hashed_password):
         with patch('authenticator.QuivrAuthenticator.login', return_value=mock_token):
-            with patch.object(AccountQueries, 'create', return_value=mock_account):
-                with patch.object(AccountQueries, 'get_one_by_username', return_value=None):  # Ensure no existing user
-                    app.dependency_overrides[authenticator.get_account_getter] = lambda: CreateAccountQueries()
-                    app.dependency_overrides[authenticator.get_account_data] = lambda username, accounts: mock_account if username == unique_username else None
+            with patch.object(MockAccountQueries, 'create', return_value=mock_account):
+                with patch.object(MockAccountQueries, 'get_one_by_username', return_value=None):  # Ensure no existing user
+                    app.dependency_overrides[authenticator.get_account_getter] = lambda: MockAccountQueries()
+                    app.dependency_overrides[authenticator.get_account_data_for_cookie] = lambda token: (unique_username, mock_account)
 
                     response = client.post("/accounts", json=account_data)
 
@@ -68,6 +65,8 @@ def test_create_account_integration():
     # Assert the response
     assert response.status_code == 200
     response_data = response.json()
+    assert response_data["access_token"] == "mock_token"
+    assert response_data["token_type"] == "bearer"
     assert response_data["account"]["id"] == "1"
     assert response_data["account"]["username"] == account_data["username"]
     assert response_data["account"]["email"] == account_data["email"]
@@ -75,8 +74,8 @@ def test_create_account_integration():
     assert response_data["account"]["last_name"] == account_data["last_name"]
     assert response_data["account"]["phone_number"] == account_data["phone_number"]
     assert response_data["account"]["role"] == account_data["role"]
-    assert "access_token" in response_data
-    assert response_data["token_type"] == "bearer"
+
+    app.dependency_overrides = {}
 
 
 @pytest.mark.usefixtures("account_queries")
@@ -91,16 +90,12 @@ def test_create_duplicate_account(account_queries):
         "role": "customer"
     }
 
-    # Insert the account to simulate an existing user
     existing_account = account_queries.create(AccountIn(**account_data), "hashed_password")
 
     app.dependency_overrides = {}
 
-    # Mock the hashing method to ensure it returns the same hashed password
-    with patch('authenticator.QuivrAuthenticator.hash_password', return_value="hashed_password"):
-        # Mock the get_one_by_username method to simulate the existing account
-        with patch.object(AccountQueries, 'get_one_by_username', return_value=existing_account):
-            response = client.post("/accounts", json=account_data)
+    with patch.object(AccountQueries, 'get_one_by_username', return_value=existing_account.username):
+        response = client.post("/accounts", json=account_data)
 
     assert response.status_code == 400
     assert response.json()["detail"] == "Duplicate Account Error: Cannot create an account with provided credentials"
