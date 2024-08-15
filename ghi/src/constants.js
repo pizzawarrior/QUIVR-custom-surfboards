@@ -161,6 +161,10 @@ export const ReactTable = styled.table`
     cursor: pointer;
   }
 
+  tr:hover {
+    background: #d1e3e8;
+  }
+
   tr:last-child td {
     border-bottom: 0;
   }
@@ -184,7 +188,11 @@ export const ReactTable = styled.table`
   }
 
   tr:nth-child(even) {
-    background-color: #c5e3eb;
+    background-color: #e1eff2;
+  }
+
+  tr:nth-child(even):hover {
+    background: #d1e3e8;
   }
 
   th::before {

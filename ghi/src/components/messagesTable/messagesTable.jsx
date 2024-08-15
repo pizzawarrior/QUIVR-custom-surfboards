@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTable, useFilters, useSortBy } from "react-table";
 import { ReactTable, TableInput } from "../../constants";
 
-const ReceivedMessagesTable = ({ columns, messages }) => {
+const MessagesTable = ({ columns, messages, filterKey }) => {
   const [filterInput, setFilterInput] = useState("");
   const [expandedRows, setExpandedRows] = useState({});
 
@@ -24,7 +24,7 @@ const ReceivedMessagesTable = ({ columns, messages }) => {
 
   const handleFilterChange = (e) => {
     const value = e.target.value || "";
-    setFilter("sender", value);
+    setFilter(filterKey, value);
     setFilterInput(value);
   };
 
@@ -40,7 +40,7 @@ const ReceivedMessagesTable = ({ columns, messages }) => {
       <TableInput
         value={filterInput}
         onChange={handleFilterChange}
-        placeholder="Search by sender"
+        placeholder={`Search by ${filterKey}...`}
       />
       <ReactTable {...getTableProps()}>
         <thead>
@@ -54,7 +54,8 @@ const ReceivedMessagesTable = ({ columns, messages }) => {
                       ? column.isSortedDesc
                         ? "sort-desc"
                         : "sort-asc"
-                      : column.Header === "Received Messages" // Check if it's the top header
+                      : column.Header === "Received Messages" ||
+                        column.Header === "Sent Messages" // Check if it's the top header
                       ? "messages-header" // Add specific class here to grab for styling
                       : ""
                   }
@@ -89,4 +90,4 @@ const ReceivedMessagesTable = ({ columns, messages }) => {
   );
 };
 
-export default ReceivedMessagesTable;
+export default MessagesTable;

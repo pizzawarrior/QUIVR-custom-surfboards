@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import SentMessagesTable from "../sentMessagesTable/SentMessagesTable";
+import MessagesTable from "../messagesTable/messagesTable";
 
 const SentMessages = ({ messages }) => {
   const columns = useMemo(
@@ -18,9 +18,6 @@ const SentMessages = ({ messages }) => {
           {
             Header: "Message",
             accessor: "body",
-            Cell: ({ value }) => {
-              return value.length > 40 ? `${value.slice(0, 40)}...` : value;
-            },
           },
           {
             Header: "Date",
@@ -36,7 +33,13 @@ const SentMessages = ({ messages }) => {
     return <h1>No messages to display.</h1>;
   }
 
-  return <SentMessagesTable columns={columns} messages={messages} />;
+  return (
+    <MessagesTable
+      columns={columns}
+      messages={messages}
+      filterKey="recipient"
+    />
+  );
 };
 
 export default SentMessages;
