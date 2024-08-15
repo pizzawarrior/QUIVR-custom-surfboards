@@ -18,9 +18,6 @@ const ReceivedMessages = ({ messages }) => {
           {
             Header: "Message",
             accessor: "body",
-            Cell: ({ value }) => {
-              return value.length > 40 ? `${value.slice(0, 40)}...` : value;
-            },
           },
           {
             Header: "Date",

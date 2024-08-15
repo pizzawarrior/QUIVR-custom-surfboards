@@ -150,10 +150,15 @@ export const ReactTable = styled.table`
   border-radius: 7px;
   color: #0d5274;
   font-family: "Open Sans", sans-serif;
+  table-layout: fixed; /* Ensures columns remain fixed width */
 
   .messages-header {
     font-size: 25px;
     color: #e76215;
+  }
+
+  tr {
+    cursor: pointer;
   }
 
   tr:last-child td {
@@ -168,6 +173,9 @@ export const ReactTable = styled.table`
     border-bottom: 2px solid #f7e7be;
     border-right: 1px solid #f7e7be;
     position: relative;
+    overflow: hidden; /* Hide overflow to prevent pushing */
+    white-space: normal; /* Allow text to wrap */
+    word-wrap: break-word; /* Ensure wrapping of long words */
   }
 
   th:last-child,
@@ -176,7 +184,7 @@ export const ReactTable = styled.table`
   }
 
   tr:nth-child(even) {
-    background-color: #9cd9e8;
+    background-color: #c5e3eb;
   }
 
   th::before {

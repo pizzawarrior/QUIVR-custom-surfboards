@@ -4,6 +4,7 @@ import { ReactTable, TableInput } from "../../constants";
 
 const ReceivedMessagesTable = ({ columns, messages }) => {
   const [filterInput, setFilterInput] = useState("");
+  const [expandedRows, setExpandedRows] = useState({});
 
   const {
     getTableProps,
@@ -25,6 +26,13 @@ const ReceivedMessagesTable = ({ columns, messages }) => {
     const value = e.target.value || "";
     setFilter("sender", value);
     setFilterInput(value);
+  };
+
+  const toggleRowExpansion = (rowIndex) => {
+    setExpandedRows((prev) => ({
+      ...prev,
+      [rowIndex]: !prev[rowIndex],
+    }));
   };
 
   return (
@@ -60,13 +68,18 @@ const ReceivedMessagesTable = ({ columns, messages }) => {
         <tbody {...getTableBodyProps()}>
           {rows.map((row, i) => {
             prepareRow(row);
+            const isExpanded = expandedRows[i];
             return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  );
-                })}
+              <tr {...row.getRowProps()} onClick={() => toggleRowExpansion(i)}>
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()}>
+                    {cell.column.id === "body"
+                      ? isExpanded
+                        ? cell.value
+                        : `${cell.value.slice(0, 40)}...`
+                      : cell.render("Cell")}
+                  </td>
+                ))}
               </tr>
             );
           })}
