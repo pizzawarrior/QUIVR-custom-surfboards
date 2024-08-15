@@ -1,8 +1,11 @@
 import pytest
+from main import app
+from fastapi.testclient import TestClient
+
+client = TestClient(app)
 
 
-@pytest.mark.usefixtures("auth_obj")
-@pytest.mark.usefixtures("dummy_user")
+@pytest.mark.usefixtures("auth_obj", "dummy_user")
 class TestAuthenticate:
     # Test the hashed_password method to make sure that the same password input will not return the same hashed password
     def test_password_hash(self, auth_obj):
@@ -14,11 +17,17 @@ class TestAuthenticate:
     # Test to validate a token is being created for a dummy user
     def test_create_access_token_for_user(self, auth_obj, dummy_user):
         token = auth_obj.get_account_data_for_cookie(account=dummy_user)
+        assert token
         assert token[0] == dummy_user.username
 
     # Test to verify no token is generated when there is no user
     def test_create_access_token_for_no_user(self, auth_obj):
         token = auth_obj.get_account_data_for_cookie(account=None)
         assert token is None
+
+    def test_logout(self):
+        response = client.delete("/token")
+        assert response.status_code == 200
+        assert "fastapi_token" not in response.cookies
 
 # # For more info on testing refer to the reference in .scratch-paper!#####

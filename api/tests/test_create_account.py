@@ -7,7 +7,7 @@ from unittest.mock import patch
 from authenticator import authenticator
 import time
 
-# TODO: Update this test to actually work
+# TODO: This will create a new account, but returns '401, Unauthorized, invalid username/
 
 client = TestClient(app)
 

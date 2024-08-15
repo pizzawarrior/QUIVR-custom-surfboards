@@ -80,12 +80,19 @@ async def get_token(
     request: Request,
     account: AccountOut = Depends(authenticator.try_get_current_account_data),
 ) -> AccountToken | None:
+    # Debugging prints
+    print("Account:", account)
+    print("Request cookies:", request.cookies)
+    print("Authenticator cookie name:", authenticator.cookie_name)
+
     if account and authenticator.cookie_name in request.cookies:
         return {
             "access_token": request.cookies[authenticator.cookie_name],
             "type": "Bearer",
             "account": account,
         }
+    else:
+        print("Token not returned, conditions not met.")
 
 
 @router.get("/accounts", response_model=List[AccountOut])
