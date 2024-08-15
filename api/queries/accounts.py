@@ -91,4 +91,4 @@ class AccountQueries(MongoQueries):
                 detail=f"Account for {username} not found",
             )
         self.collection.delete_one({"username": username})
-        return {"message": "successfully deleted"}
+        return {"message": f"{username} successfully deleted"}

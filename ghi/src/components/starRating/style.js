@@ -10,7 +10,7 @@ export const Container = styled.div`
   }
 
   .on {
-    color: #000;
+    color: #e76215;
   }
   .off {
     color: #ccc;
