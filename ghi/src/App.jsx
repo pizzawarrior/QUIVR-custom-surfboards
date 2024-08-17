@@ -6,7 +6,7 @@ import UserList from "./pages/userList/UserList.jsx";
 import Navbar from "./components/navbar/Navbar.jsx";
 import { FooterContainer } from "./components/footer/Footer.jsx";
 import Login from "./pages/login/Login.jsx";
-import NotFound from "./components/errorNotification/NotFound.jsx";
+import PageNotFound from "./components/pageNotFound/PageNotFound.jsx";
 import Messages from "./pages/messages/Messages.jsx";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
         <Route path="/order-history" element={<OrderHistory />} />
         <Route path="/users" element={<UserList />} />
         <Route path="/messages" element={<Messages />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <FooterContainer />
     </Router>

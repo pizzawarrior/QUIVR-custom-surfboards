@@ -35,6 +35,17 @@ const MessagesTable = ({ columns, messages, filterKey }) => {
     }));
   };
 
+  const formatMessageBody = (cell, isExpanded) => {
+    if (cell.column.id == "body") {
+      return !isExpanded
+        ? cell.value.length > 40
+          ? `${cell.value.slice(0, 40)}...`
+          : cell.value
+        : cell.render("Cell");
+    }
+    return cell.render("Cell");
+  };
+
   return (
     <div>
       <TableInput
@@ -74,11 +85,7 @@ const MessagesTable = ({ columns, messages, filterKey }) => {
               <tr {...row.getRowProps()} onClick={() => toggleRowExpansion(i)}>
                 {row.cells.map((cell) => (
                   <td {...cell.getCellProps()}>
-                    {cell.column.id === "body"
-                      ? isExpanded
-                        ? cell.value
-                        : `${cell.value.slice(0, 40)}...`
-                      : cell.render("Cell")}
+                    {formatMessageBody(cell, isExpanded)}
                   </td>
                 ))}
               </tr>
