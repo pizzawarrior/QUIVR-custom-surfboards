@@ -25,7 +25,7 @@ class UpdateOrderQueries:
         else:
             raise HTTPException(
                 status_code=404, detail="Order ID {order_id} not found"
-        )
+            )
 
 
 @pytest.mark.usefixtures("dummy_user")

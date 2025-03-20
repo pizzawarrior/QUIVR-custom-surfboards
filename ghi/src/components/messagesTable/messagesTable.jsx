@@ -36,7 +36,7 @@ const MessagesTable = ({ columns, messages, filterKey }) => {
   };
 
   const formatMessageBody = (cell, isExpanded) => {
-    if (cell.column.id == "body") {
+    if (cell.column.id === "body") {
       return !isExpanded
         ? cell.value.length > 40
           ? `${cell.value.slice(0, 40)}...`
