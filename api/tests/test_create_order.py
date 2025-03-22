@@ -102,7 +102,6 @@ class TestUser:
             assert response.status_code == 422
             assert "detail" in response.json()
 
-            # Clean up dependency overrides
             app.dependency_overrides = {}
 
     def test_create_order_invalid_token(self, dummy_order, dummy_user):

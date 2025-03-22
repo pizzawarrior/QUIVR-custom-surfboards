@@ -12,14 +12,11 @@ class EmptyReviewQueries:
 
 
 def test_list_reviews():
-    # Arrange
     app.dependency_overrides[ReviewQueries] = EmptyReviewQueries
 
     response = client.get("/reviews")
 
-    # Act
     app.dependency_overrides = {}
 
-    # Assert
     assert response.status_code == 200
     assert response.json() == []

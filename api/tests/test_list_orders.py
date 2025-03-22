@@ -20,7 +20,6 @@ class TestUser:
 
             expected = []
 
-            # Assert
             assert response.status_code == 200
             assert response.json() == expected
 

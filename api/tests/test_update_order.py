@@ -8,7 +8,7 @@ from authenticator import authenticator
 
 
 """
-This test checks to see if we can update an order
+Test to see if we can update an order
 """
 
 client = TestClient(app)
@@ -49,7 +49,6 @@ class TestUpdateOrder:
             }
 
             response = client.put("/orders/valid_order_id", json=update_data, headers=headers)
-            # print(response.json())
 
             assert response.status_code == 200
             assert response.json() == {
@@ -57,7 +56,7 @@ class TestUpdateOrder:
                 "order_id": "valid_order_id",
                 "updated_data": update_data
             }
-            # Clean up dependency overrides
+
             app.dependency_overrides = {}
 
     def test_update_order_invalid_id(self, dummy_user):
@@ -82,5 +81,4 @@ class TestUpdateOrder:
             assert response.status_code == 404
             assert response.json() == {"detail": "Order ID {order_id} not found"}
 
-            # Clean up dependency overrides
             app.dependency_overrides = {}
