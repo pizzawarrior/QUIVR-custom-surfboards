@@ -9,8 +9,7 @@ from queries.accounts import AccountQueries
 from authenticator import authenticator
 
 """
-This is where we create our fixtures for use in the actual tests.
-
+Use these fixtures in the tests.
 For more info on testing refer to the reference in .scratch-paper!
 """
 

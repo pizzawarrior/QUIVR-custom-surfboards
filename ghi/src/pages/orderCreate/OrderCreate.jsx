@@ -74,7 +74,6 @@ const OrderCreate = () => {
       handleClear();
     }
   }
-  // console.log(addToCart);
 
   return (
     <ImgBackground>

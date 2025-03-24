@@ -59,7 +59,6 @@ def test_get_one_by_username_not_found_returns_none(account_queries):
     assert result is None
 
 
-# This is an end to end test that sends a real request ********
 @pytest.mark.usefixtures("account_queries", "clean_db")
 def test_create_new_account_creates_new_account(account_queries, clean_db):
     new_account_data = {

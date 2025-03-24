@@ -144,22 +144,6 @@ The Orders model represents all of the properties required to create a custome s
 - surfboard_tail_style: string; users select from list of modern options
 - surfboard_glassing: string; users select from list of common options
 - surfboard_desc: string | optional; users can add additional details such as color, or other requests
-- order_id: unique identifier for the review, automatically generated using MongoDB
-- date: string
-- reviewed: boolean; displays the status of whether the order has been reviewed or not
-- order_status: string; displays current status of order, as updated by the shaper
-- customer_username: string; name used when customer creates account
-- surfboard_shaper: string; name selected from options on form
-- surfboard_model: string; name of surfboard model
-- surfboard_length: int; number signifying length of board
-- surfboard_width: int, number signifying width of board
-- surfboard_thickness: int; number signifying thickness of board
-- surfboard_construction: string; describes the foam construction of the board
-- surfboard_fin_system: string; users select their desired modern fin system
-- surfboard_fin_count: int; number of fin plugs on board
-- surfboard_tail_style: string; users select from list of modern options
-- surfboard_glassing: string; users select from list of common options
-- surfboard_desc: string | optional; users can add additional details such as color, or other requests
 
 The only properties that can be updated on this model are whether the order has been reviewed or not, and what the status is.
 
